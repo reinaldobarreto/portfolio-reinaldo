@@ -1,0 +1,189 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FastAPI CRUD Demo",
+    "description": "Demo Python-first: CRUD REST para Tasks (GET, POST, PATCH, DELETE), JWT (demo), Swagger e Redoc.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "http://localhost:8000", "description": "FastAPI local" }
+  ],
+  "tags": [
+    { "name": "health" },
+    { "name": "auth" },
+    { "name": "tasks" }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
+    },
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "title": { "type": "string", "example": "Add Pydantic validation" },
+          "done": { "type": "boolean", "example": false }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["health"],
+        "summary": "GET — health check",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "ok",
+                  "service": "apis-fastapi-demo",
+                  "timestamp": "2026-08-03T22:00:00.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "POST — login e JWT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "demo@corelabs.dev" },
+                  "password": { "type": "string", "example": "demo123" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token emitido",
+            "content": {
+              "application/json": {
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "token_type": "Bearer",
+                  "expires_in": 3600
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": ["tasks"],
+        "summary": "GET — listar tasks",
+        "security": [{ "bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Lista de tasks",
+            "content": {
+              "application/json": {
+                "example": {
+                  "tasks": [
+                    { "id": 1, "title": "Build REST API", "done": true },
+                    { "id": 2, "title": "Add validation (Pydantic)", "done": false }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["tasks"],
+        "summary": "POST — criar task",
+        "security": [{ "bearer": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string", "example": "New task" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criada",
+            "content": {
+              "application/json": {
+                "example": { "created": true, "task": { "id": 10, "title": "New task", "done": false } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{task_id}": {
+      "get": {
+        "tags": ["tasks"],
+        "summary": "GET — buscar task por id",
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "task_id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encontrada",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Task" } } }
+          },
+          "404": { "description": "Não encontrada" }
+        }
+      },
+      "patch": {
+        "tags": ["tasks"],
+        "summary": "PATCH — atualizar task",
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "task_id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "done": { "type": "boolean", "example": true }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Atualizada" },
+          "404": { "description": "Não encontrada" }
+        }
+      },
+      "delete": {
+        "tags": ["tasks"],
+        "summary": "DELETE — remover task",
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "task_id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "204": { "description": "Removida" },
+          "404": { "description": "Não encontrada" }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Data Analysis Demo · CoreLabs</title>
+  <meta name="description" content="Mini demo de análise de dados em Python: KPIs, estatística descritiva e agregações." />
+  <link rel="icon" href="../../favicon.png" type="image/png" />
+  <style>
+    :root {
+      --bg:#0b1220; --panel:#121a2b; --panel2:#182235; --border:rgba(255,255,255,.08);
+      --text:#e8eefc; --muted:#9aa8c7; --blue:#3776ab; --yellow:#ffd343; --green:#95c11f;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:Inter,system-ui,sans-serif;color:var(--text);
+      background:radial-gradient(900px 420px at 10% -10%,rgba(55,118,171,.18),transparent 60%),
+      radial-gradient(900px 420px at 80% 0%,rgba(255,211,67,.14),transparent 60%),var(--bg)}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+    .badge{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-weight:900;color:var(--yellow);
+      background:linear-gradient(145deg,#1f2937,#111827);border:1px solid var(--border)}
+    h1{margin:0;font-size:1.3rem}
+    .lead{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+    .grid{display:grid;gap:14px}
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:18px;padding:14px}
+    h2{margin:0 0 10px;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+    .kpis{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+    @media(min-width:700px){.kpis{grid-template-columns:repeat(4,1fr)}}
+    .kpi{padding:12px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03)}
+    .kpi .v{font-size:1.1rem;font-weight:900}
+    .kpi .l{font-size:.75rem;color:var(--muted);margin-top:2px}
+    table{width:100%;border-collapse:separate;border-spacing:0 8px}
+    td,th{padding:10px 12px;text-align:left;font-size:.85rem}
+    th{color:var(--muted);font-weight:800}
+    tr{background:rgba(255,255,255,.03);border:1px solid var(--border)}
+    tr td:first-child, tr th:first-child{border-top-left-radius:12px;border-bottom-left-radius:12px}
+    tr td:last-child, tr th:last-child{border-top-right-radius:12px;border-bottom-right-radius:12px}
+    .footer{margin-top:16px;color:var(--muted);font-size:.8rem;text-align:center}
+    .footer a{color:#93c5fd;text-decoration:none}
+    .pill{display:inline-flex;gap:8px;align-items:center;margin-top:10px;padding:8px 12px;border-radius:999px;border:1px solid rgba(55,118,171,.35);background:rgba(13,17,23,.5);color:var(--muted);font-size:.78rem;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">DA</div>
+      <div>
+        <h1>Python Data Analysis — KPIs Demo</h1>
+        <p class="lead">Estatística descritiva · agregações · KPIs · estrutura de report em JSON</p>
+        <div class="pill">Pandas · NumPy · Polars · SQL analytics mindset</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>KPIs</h2>
+        <div class="kpis" id="kpis"></div>
+      </section>
+      <section class="card">
+        <h2>By channel</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Orders</th>
+              <th>Revenue</th>
+              <th>AOV</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <p class="footer">
+      CoreLabs Dev Nexus ·
+      <a href="../../">Portfólio</a>
+    </p>
+  </div>
+
+  <script>
+    function fmtMoney(v) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(v);
+    }
+    function fmtNum(v) {
+      return new Intl.NumberFormat('en-US').format(v);
+    }
+
+    fetch('./report.json')
+      .then((r) => r.json())
+      .then((data) => {
+        const k = data.kpis || {};
+        const kpis = [
+          { label: 'Orders total', value: fmtNum(k.orders_total || 0) },
+          { label: 'Revenue total', value: fmtMoney(k.revenue_total || 0) },
+          { label: 'AOV mean', value: fmtMoney(k.aov_mean || 0) },
+          { label: 'Avg revenue/day', value: fmtMoney(k.revenue_mean_per_day || 0) },
+        ];
+
+        document.getElementById('kpis').innerHTML = kpis
+          .map((x) => `<div class="kpi"><div class="v">${x.value}</div><div class="l">${x.label}</div></div>`)
+          .join('');
+
+        const rows = (data.by_channel || [])
+          .map((r) => (
+            `<tr>
+              <td><strong>${r.channel}</strong></td>
+              <td>${fmtNum(r.orders)}</td>
+              <td>${fmtMoney(r.revenue)}</td>
+              <td>${fmtMoney(r.aov)}</td>
+            </tr>`
+          ))
+          .join('');
+
+        document.getElementById('rows').innerHTML = rows || '<tr><td colspan="4">No data</td></tr>';
+      })
+      .catch(() => {
+        document.getElementById('kpis').innerHTML = '<div class="kpi"><div class="v">Error</div><div class="l">Could not load report.json</div></div>';
+      });
+  </script>
+</body>
+</html>
+

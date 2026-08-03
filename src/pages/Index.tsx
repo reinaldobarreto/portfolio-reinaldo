@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 import SkillCard from '../components/SkillCard';
@@ -69,52 +69,52 @@ const Index = () => {
 
   const skills = [
     {
-      category: 'React Native & Mobile',
-      icon: <Smartphone className="w-8 h-8" />,
-      technologies: ['React Native', 'Expo', 'TypeScript', 'Offline-first', 'MapLibre', 'Push Notifications', 'Android', 'iOS'],
-      description: 'Stack principal para apps mobile multiplataforma, com foco em performance, UX premium, mapas, pagamentos e publicação Android/iOS'
-    },
-    {
-      category: 'JavaScript Core',
-      icon: <Terminal className="w-8 h-8" />,
-      technologies: ['JavaScript (ES6+)', 'TypeScript', 'Clean Architecture', 'Zustand', 'TanStack Query', 'Testing', 'Docs as Code'],
-      description: 'Base da minha atuação full-cycle: código modular, legível, testável e preparado para escalar em produto real'
-    },
-    {
-      category: 'Backend Node.js / NestJS',
+      category: 'Python Backend Engineering',
       icon: <Server className="w-8 h-8" />,
-      technologies: ['Node.js', 'NestJS', 'REST', 'Webhooks', 'JWT', 'Supabase Edge Functions', 'PostgreSQL', 'RLS'],
-      description: 'APIs seguras, regras de negócio no servidor, integrações, pagamentos, tempo real e arquitetura desacoplada'
+      technologies: ['Python', 'FastAPI', 'Django', 'DRF', 'Pydantic', 'SQLAlchemy', 'Celery', 'Uvicorn/Gunicorn'],
+      description: 'APIs REST escaláveis, validação robusta, arquitetura limpa, background jobs e serviços prontos para produção'
     },
     {
-      category: 'Frontend Web',
-      icon: <Code className="w-8 h-8" />,
-      technologies: ['Next.js', 'React.js', 'Vite', 'Tailwind CSS', 'Responsive UI', 'Accessibility', 'SEO'],
-      description: 'Interfaces modernas e responsivas com React, Next.js e Vite, priorizando experiência, performance e manutenção'
+      category: 'Automation & Integrations',
+      icon: <Terminal className="w-8 h-8" />,
+      technologies: ['Python', 'Requests', 'BeautifulSoup', 'Playwright', 'Selenium', 'AsyncIO', 'Cron', 'File Pipelines'],
+      description: 'Automação de processos empresariais: ETL, integração com APIs, processamento de arquivos e rotinas agendadas'
     },
     {
-      category: 'Database & Cloud',
+      category: 'Data Analysis & Statistics',
+      icon: <Brain className="w-8 h-8" />,
+      technologies: ['Pandas', 'NumPy', 'Polars', 'Jupyter', 'Matplotlib', 'Plotly', 'Seaborn', 'Scikit-learn'],
+      description: 'Data cleaning, estatística descritiva, EDA, KPIs, dashboards e análises orientadas a negócio'
+    },
+    {
+      category: 'SQL & Databases',
       icon: <Database className="w-8 h-8" />,
-      technologies: ['PostgreSQL', 'Supabase', 'SQLite', 'Redis', 'Storage', 'Realtime', 'Migrations'],
-      description: 'Modelagem relacional, RLS, cache, sincronização offline e backends cloud prontos para produção'
+      technologies: ['PostgreSQL', 'MySQL', 'SQLite', 'MongoDB', 'Redis', 'Indexes', 'Query Optimization', 'Transactions'],
+      description: 'Modelagem, relacionamentos, consultas complexas, performance e consistência transacional em ambientes reais'
     },
     {
-      category: 'DevOps & Delivery',
+      category: 'Cloud & Delivery',
       icon: <CloudLightning className="w-8 h-8" />,
-      technologies: ['Docker', 'GitHub Actions', 'CI/CD', 'Expo EAS', 'Vercel', 'Observability'],
-      description: 'Deploy automatizado, pipelines, builds mobile e entrega contínua com qualidade'
+      technologies: ['Docker', 'Linux', 'GitHub Actions', 'CI/CD', 'Nginx', 'Observability', 'AWS', 'Azure'],
+      description: 'Deploy, pipelines e operação de serviços com foco em entrega confiável e escalabilidade'
+    },
+    {
+      category: 'JavaScript (Complementary)',
+      icon: <Code className="w-8 h-8" />,
+      technologies: ['TypeScript', 'Node.js', 'NestJS', 'Next.js', 'React', 'Express', 'Testing', 'Docs as Code'],
+      description: 'Stack complementar para full-cycle: web, integrações e UI quando faz sentido ao redor do backend Python'
     },
     {
       category: 'Security & Auth',
       icon: <Shield className="w-8 h-8" />,
-      technologies: ['OAuth2', 'JWT', 'RLS', 'Anti-fraud', 'LGPD', 'Encryption', 'Audit Logs'],
-      description: 'Autenticação robusta, proteção de dados sensíveis e regras de segurança aplicadas no backend'
+      technologies: ['OAuth2', 'JWT', 'RBAC', 'LGPD', 'Encryption', 'Audit Logs', 'Input Validation', 'Rate Limiting'],
+      description: 'Autenticação robusta, validação de I/O e proteção de dados sensíveis aplicadas no backend'
     },
     {
-      category: 'Performance & UX',
-      icon: <Zap className="w-8 h-8" />,
-      technologies: ['Lazy Loading', 'Virtualization', 'Caching', 'Animations', 'Haptics', 'Dark Mode'],
-      description: 'Otimização de listas, mapas, carregamento incremental e microinterações para apps comerciais'
+      category: 'Mobile (Complementary)',
+      icon: <Smartphone className="w-8 h-8" />,
+      technologies: ['React Native', 'Expo', 'Offline-first', 'Push Notifications', 'Performance', 'Animations', 'Android', 'iOS'],
+      description: 'Experiência complementar em mobile multiplataforma para produtos que pedem app nativo com UX premium'
     }
   ];
 
@@ -144,6 +144,30 @@ const Index = () => {
 
   const projects = [
     {
+      title: 'FastAPI — CRUD REST + OpenAPI',
+      description: 'Demo Python-first com endpoints CRUD, documentação Swagger/Redoc e modelagem simples orientada a produção.',
+      technologies: ['Python', 'FastAPI', 'Pydantic', 'OpenAPI', 'Swagger', 'Redoc', 'REST'],
+      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&h=300&fit=crop',
+      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/apis-fastapi/',
+      featured: true
+    },
+    {
+      title: 'Django + DRF — CRUD REST',
+      description: 'Demo com padrões do Django REST Framework: serializer, viewset e rotas, com documentação OpenAPI.',
+      technologies: ['Python', 'Django', 'Django REST Framework', 'OpenAPI', 'Swagger', 'Redoc', 'REST'],
+      image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=500&h=300&fit=crop',
+      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/apis-django/',
+      featured: true
+    },
+    {
+      title: 'Python Data Analysis — KPIs',
+      description: 'Mini demo de análise de dados com estatística descritiva e indicadores a partir de um dataset CSV.',
+      technologies: ['Python', 'Pandas', 'NumPy', 'Statistics', 'KPIs', 'Data Cleaning'],
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
+      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/data-analysis-python/',
+      featured: true
+    },
+    {
       title: 'PopFaxina — Marketplace de Limpeza',
       description: 'Produto mobile em sociedade para conectar clientes e prestadores de serviços de limpeza. Projeto privado — código-fonte e detalhes comerciais sob confidencialidade.',
       technologies: ['React Native', 'Expo', 'TypeScript', 'Supabase', 'MapLibre', 'Mobile-first'],
@@ -154,7 +178,7 @@ const Index = () => {
     },
     {
       title: 'Portfolio React — Este Site',
-      description: 'Portfólio pessoal com Vite, React, TypeScript e Tailwind. Identidade JavaScript-first, animações, dark mode e deploy via GitHub Pages.',
+      description: 'Portfólio com Vite, React, TypeScript e Tailwind. Reposicionado para Python como stack principal e JavaScript como complementar.',
       technologies: ['Vite', 'React.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GitHub Pages'],
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop',
       link: 'https://github.com/reinaldobarreto/portfolio-reinaldo-react',
@@ -257,9 +281,9 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl neuo-inset-sm mb-6"
             >
-              <Smartphone className="w-5 h-5 text-portfolio-secondary" />
+              <Server className="w-5 h-5 text-portfolio-secondary" />
               <span className="text-base md:text-lg text-foreground font-mono font-semibold">
-                React Native Developer · JavaScript
+                Python Backend Engineer · Automation · Data
               </span>
               <Rocket className="w-5 h-5 text-portfolio-primary" />
             </motion.div>
@@ -270,10 +294,10 @@ const Index = () => {
               animate={heroInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              Especialista em <span className="text-portfolio-primary font-semibold">React Native</span> e
-              <span className="text-portfolio-secondary font-semibold"> JavaScript</span>, com backend em
-              <span className="text-portfolio-accent font-semibold"> Node.js/NestJS</span> e frontend em
-              <span className="text-foreground font-semibold"> Next.js/Vite</span>.
+              Foco atual em <span className="text-portfolio-primary font-semibold">Python</span> para construir
+              <span className="text-portfolio-secondary font-semibold"> APIs REST</span>, automação de processos e
+              <span className="text-portfolio-accent font-semibold"> análise de dados</span> com SQL.
+              JavaScript/TypeScript continuam como stack complementar (Node/Nest, Next/React).
             </motion.p>
 
             {/* Action Buttons */}
@@ -377,8 +401,8 @@ const Index = () => {
               <Zap className="w-8 h-8 text-portfolio-accent ml-3 animate-pulse" />
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Experiência sólida em JavaScript full-cycle com foco em mobile, backend e frontend modernos e 
-              <span className="text-portfolio-primary font-semibold"> inovação contínua</span>
+              Stack Python-first para backend, automação e dados, com experiência complementar em JavaScript/TypeScript
+              para web/mobile e integrações de produto
             </p>
             <div className="flex items-center justify-center mt-4 space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center">
@@ -414,9 +438,10 @@ const Index = () => {
             className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
           >
             {[
-              { icon: Code, label: 'JavaScript Stack', count: 'JS First' },
-              { icon: Database, label: 'Backend/APIs', count: 'Node/Nest' },
-              { icon: CloudLightning, label: 'Web/Mobile', count: 'RN/Next' },
+              { icon: Server, label: 'Python Stack', count: 'Primary' },
+              { icon: Terminal, label: 'Automation', count: 'Python' },
+              { icon: Database, label: 'SQL & Data', count: 'Analytics' },
+              { icon: Code, label: 'JavaScript', count: 'Complementary' },
               { icon: Coffee, label: 'Cups of Coffee', count: '∞', animate: true }
             ].map((stat, index) => (
               <div key={stat.label} className="text-center p-6 rounded-2xl neuo-flat">
@@ -446,8 +471,8 @@ const Index = () => {
               <Heart className="w-8 h-8 text-portfolio-red ml-3 animate-pulse" />
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Trajetória construindo produtos JavaScript para mobile, web e backend, incluindo setor público e 
-              <span className="text-portfolio-secondary font-semibold"> soluções corporativas inovadoras</span>
+              Experiência em sistemas corporativos e setor público, com evolução de foco para backend Python, automação
+              e soluções orientadas a dados em ambientes reais
             </p>
           </motion.div>
           
@@ -473,8 +498,7 @@ const Index = () => {
               <Star className="w-8 h-8 text-portfolio-accent ml-3 animate-pulse" />
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Projetos em JavaScript, React Native, Node.js e Next.js para produtos reais, open source e 
-              <span className="text-portfolio-orange font-semibold"> projetos pessoais inovadores</span>
+              Projetos Python-first (APIs, automação, dados) e stack complementar em JavaScript/TypeScript para web e mobile
             </p>
           </motion.div>
           

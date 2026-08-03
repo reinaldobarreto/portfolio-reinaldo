@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FastAPI Demo · CoreLabs</title>
+  <meta name="description" content="Demo Python/FastAPI: CRUD REST (GET POST PATCH DELETE), Swagger e Redoc." />
+  <link rel="icon" href="../../favicon.png" type="image/png" />
+  <style>
+    :root {
+      --bg:#0b1220; --panel:#121a2b; --panel2:#182235; --border:rgba(255,255,255,.08);
+      --text:#e8eefc; --muted:#9aa8c7; --blue:#3776ab; --yellow:#ffd343; --green:#95c11f;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:Inter,system-ui,sans-serif;color:var(--text);
+      background:radial-gradient(900px 420px at 10% -10%,rgba(55,118,171,.22),transparent 60%),
+      radial-gradient(900px 420px at 80% 0%,rgba(255,211,67,.16),transparent 60%),var(--bg)}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+    .badge{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-weight:900;color:var(--yellow);
+      background:linear-gradient(145deg,#1f2937,#111827);border:1px solid var(--border)}
+    h1{margin:0;font-size:1.3rem}
+    .lead{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+    .docs{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+    .docs a{color:#fff;text-decoration:none;font-size:.8rem;font-weight:800;padding:8px 12px;border-radius:10px;background:#1f2937;border:1px solid var(--border)}
+    .docs a.sw{background:linear-gradient(135deg,var(--yellow),var(--blue));color:#0b1220}
+    .docs a.re{background:linear-gradient(135deg,var(--blue),#1d4ed8)}
+    .grid{display:grid;gap:14px}
+    @media(min-width:900px){.grid{grid-template-columns:1.15fr .85fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:18px;padding:14px}
+    h2{margin:0 0 10px;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+    .ep{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);margin-bottom:7px}
+    .method{font-size:.7rem;font-weight:900;padding:3px 7px;border-radius:999px}
+    .get{background:rgba(149,193,31,.14);color:#d9f99d}
+    .post{background:rgba(55,118,171,.16);color:#93c5fd}
+    .patch{background:rgba(255,211,67,.16);color:#fde68a}
+    .del{background:rgba(239,68,68,.15);color:#fca5a5}
+    .path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem}
+    button{border:0;cursor:pointer;border-radius:10px;padding:7px 11px;font-weight:800;font-size:.76rem;color:#0b1220;background:linear-gradient(135deg,var(--yellow),#f59e0b)}
+    .token,.note{margin-top:10px;padding:10px;border-radius:12px;background:rgba(0,0,0,.25);border:1px dashed var(--border);font-size:.78rem;color:#cbd5e1;word-break:break-all}
+    .status{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;color:var(--muted);margin-top:10px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}
+    .dot.ok{background:var(--green);box-shadow:0 0 10px rgba(149,193,31,.6)}
+    pre{margin:0;min-height:320px;max-height:520px;overflow:auto;background:#060b14;border:1px solid var(--border);border-radius:14px;padding:14px;font-size:.8rem;line-height:1.45;color:#dbeafe}
+    .footer{margin-top:16px;color:var(--muted);font-size:.8rem;text-align:center}
+    .footer a{color:#93c5fd;text-decoration:none}
+    .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .chip{font-size:.7rem;padding:4px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">PY</div>
+      <div>
+        <h1>FastAPI — CRUD REST Demo</h1>
+        <p class="lead">CRUD · JWT (demo) · Swagger + Redoc · persistência local (localStorage)</p>
+      </div>
+      <div class="docs">
+        <a class="sw" href="./swagger.html">Swagger</a>
+        <a class="re" href="./redoc.html">Redoc</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Endpoints</h2>
+        <div class="ep"><div><span class="method get">GET</span> <span class="path">/health</span></div><button type="button" onclick="callApi('GET','/health')">Chamar</button></div>
+        <div class="ep"><div><span class="method post">POST</span> <span class="path">/auth/login</span></div><button type="button" onclick="callApi('POST','/auth/login')">Login</button></div>
+        <div class="ep"><div><span class="method get">GET</span> <span class="path">/tasks</span></div><button type="button" onclick="callApi('GET','/tasks')">Listar</button></div>
+        <div class="ep"><div><span class="method get">GET</span> <span class="path">/tasks/:id</span></div><button type="button" onclick="callApi('GET','/tasks/1')">Buscar</button></div>
+        <div class="ep"><div><span class="method post">POST</span> <span class="path">/tasks</span></div><button type="button" onclick="callApi('POST','/tasks')">Criar</button></div>
+        <div class="ep"><div><span class="method patch">PATCH</span> <span class="path">/tasks/:id</span></div><button type="button" onclick="callApi('PATCH','/tasks/2')">Parcial</button></div>
+        <div class="ep"><div><span class="method del">DELETE</span> <span class="path">/tasks/:id</span></div><button type="button" onclick="callApi('DELETE','/tasks/3')">Remover</button></div>
+
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Pydantic</span>
+          <span class="chip">OpenAPI</span><span class="chip">Swagger</span><span class="chip">Redoc</span><span class="chip">JWT</span>
+        </div>
+
+        <div class="token" id="tokenBox">JWT: (faça login)</div>
+        <div class="note">Persistência da demo no browser: <strong>localStorage</strong>. Em FastAPI real, você conectaria um banco (PostgreSQL/SQLite) e validações Pydantic.</div>
+        <p class="status"><span class="dot" id="statusDot"></span><span id="statusText">Pronto</span></p>
+      </section>
+
+      <section class="card">
+        <h2>Resposta</h2>
+        <pre id="output">{ "message": "Teste os endpoints. Comece por Login." }</pre>
+      </section>
+    </div>
+
+    <p class="footer">
+      CoreLabs Dev Nexus ·
+      <a href="../../">Portfólio</a>
+    </p>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'corelabs.fastapi.demo.tasks';
+    const TOKEN_KEY = 'corelabs.fastapi.demo.token';
+    const SEED = [
+      { id: 1, title: 'Build REST API', done: true },
+      { id: 2, title: 'Add validation (Pydantic)', done: false },
+      { id: 3, title: 'Ship to production', done: false },
+    ];
+
+    function loadTasks() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (_) {}
+      return SEED.map((t) => ({ ...t }));
+    }
+    function saveTasks(tasks) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    }
+
+    let tasks = loadTasks();
+    let nextId = Math.max(0, ...tasks.map((t) => t.id)) + 1;
+    let token = localStorage.getItem(TOKEN_KEY) || null;
+    if (token) document.getElementById('tokenBox').textContent = 'JWT: ' + token;
+
+    function setStatus(ok, text) {
+      document.getElementById('statusDot').classList.toggle('ok', !!ok);
+      document.getElementById('statusText').textContent = text;
+    }
+    function show(data, status) {
+      document.getElementById('output').textContent = JSON.stringify({ status: status || 200, ...data }, null, 2);
+    }
+    function fakeJwt(payload) {
+      return btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' })) + '.' + btoa(JSON.stringify(payload)) + '.demo-signature';
+    }
+    function requireAuth() {
+      if (!token) {
+        show({ error: 'Unauthorized', message: 'Faça login antes.' }, 401);
+        setStatus(false, '401 — token ausente');
+        return false;
+      }
+      return true;
+    }
+
+    async function callApi(method, path) {
+      setStatus(false, method + ' ' + path + '...');
+      await new Promise((r) => setTimeout(r, 220));
+
+      if (path === '/health') {
+        show({ data: { status: 'ok', service: 'apis-fastapi-demo', timestamp: new Date().toISOString() } });
+        setStatus(true, 'GET /health OK');
+        return;
+      }
+
+      if (path === '/auth/login' && method === 'POST') {
+        token = fakeJwt({ sub: 1, email: 'demo@corelabs.dev', role: 'admin', iat: Math.floor(Date.now()/1000), exp: Math.floor(Date.now()/1000)+3600 });
+        localStorage.setItem(TOKEN_KEY, token);
+        document.getElementById('tokenBox').textContent = 'JWT: ' + token;
+        show({ data: { access_token: token, token_type: 'Bearer', expires_in: 3600 } });
+        setStatus(true, 'POST /auth/login OK');
+        return;
+      }
+
+      if (!requireAuth()) return;
+
+      if (method === 'GET' && path === '/tasks') {
+        show({ data: { tasks, total: tasks.length } });
+        setStatus(true, 'GET /tasks OK');
+        return;
+      }
+
+      if (method === 'GET' && path.startsWith('/tasks/')) {
+        const id = Number(path.split('/')[2]);
+        const task = tasks.find((t) => t.id === id);
+        if (!task) { show({ error: 'Not Found' }, 404); setStatus(false, '404'); return; }
+        show({ data: task });
+        setStatus(true, 'GET /tasks/:id OK');
+        return;
+      }
+
+      if (method === 'POST' && path === '/tasks') {
+        const task = { id: nextId++, title: 'New task (POST)', done: false };
+        tasks.push(task);
+        saveTasks(tasks);
+        show({ data: { created: true, task } }, 201);
+        setStatus(true, 'POST /tasks OK');
+        return;
+      }
+
+      if (method === 'PATCH' && path.startsWith('/tasks/')) {
+        const id = Number(path.split('/')[2]);
+        const task = tasks.find((t) => t.id === id);
+        if (!task) { show({ error: 'Not Found' }, 404); setStatus(false, '404'); return; }
+        task.done = !task.done;
+        saveTasks(tasks);
+        show({ data: { updated: true, method: 'PATCH', task } });
+        setStatus(true, 'PATCH /tasks/:id OK');
+        return;
+      }
+
+      if (method === 'DELETE' && path.startsWith('/tasks/')) {
+        const id = Number(path.split('/')[2]);
+        const i = tasks.findIndex((t) => t.id === id);
+        if (i < 0) { show({ error: 'Not Found' }, 404); setStatus(false, '404'); return; }
+        const removed = tasks.splice(i, 1)[0];
+        saveTasks(tasks);
+        show({ data: { deleted: true, task: removed } });
+        setStatus(true, 'DELETE /tasks/:id OK');
+      }
+    }
+  </script>
+</body>
+</html>
+

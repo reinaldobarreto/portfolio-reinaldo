@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Django + DRF CRUD Demo",
+    "description": "Demo Python-first: CRUD REST inspirado em Django REST Framework (serializer/viewset/router) com OpenAPI, Swagger e Redoc.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "http://localhost:8000", "description": "Django local" }
+  ],
+  "tags": [
+    { "name": "health" },
+    { "name": "tasks" }
+  ],
+  "components": {
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "title": { "type": "string", "example": "DRF serializer" },
+          "description": { "type": "string", "example": "Serializers for validation" },
+          "done": { "type": "boolean", "example": true }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/health/": {
+      "get": {
+        "tags": ["health"],
+        "summary": "GET — health check",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "ok",
+                  "service": "apis-django-drf-demo",
+                  "timestamp": "2026-08-03T22:00:00.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tasks/": {
+      "get": {
+        "tags": ["tasks"],
+        "summary": "GET — listar tasks",
+        "responses": {
+          "200": {
+            "description": "Lista paginada",
+            "content": {
+              "application/json": {
+                "example": {
+                  "count": 3,
+                  "results": [
+                    { "id": 1, "title": "DRF serializer", "description": "Serializers for validation", "done": true },
+                    { "id": 2, "title": "ViewSet + Router", "description": "Standard CRUD endpoints", "done": false }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["tasks"],
+        "summary": "POST — criar task",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string", "example": "New task" },
+                  "description": { "type": "string", "example": "created via DRF" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Task" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tasks/{id}/": {
+      "get": {
+        "tags": ["tasks"],
+        "summary": "GET — buscar task por id",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Encontrada", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Task" } } } },
+          "404": { "description": "Não encontrada" }
+        }
+      },
+      "put": {
+        "tags": ["tasks"],
+        "summary": "PUT — substituir task",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Atualizada" }, "404": { "description": "Não encontrada" } }
+      },
+      "patch": {
+        "tags": ["tasks"],
+        "summary": "PATCH — atualizar task",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Atualizada" }, "404": { "description": "Não encontrada" } }
+      },
+      "delete": {
+        "tags": ["tasks"],
+        "summary": "DELETE — remover task",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": { "204": { "description": "Removida" }, "404": { "description": "Não encontrada" } }
+      }
+    }
+  }
+}
+
