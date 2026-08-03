@@ -1,9 +1,9 @@
 
-# Portfólio Reinaldo Barreto da Silva - JavaScript Full-Cycle Developer
+# Portfólio Reinaldo Barreto - Python Backend Engineer
 
-🌐 **Acesse o portfólio**: [https://reinaldobarreto.github.io/portfolio-reinaldo-react/](https://reinaldobarreto.github.io/portfolio-reinaldo-react/)
+🌐 **Acesse o portfólio**: [https://reinaldobarreto.github.io/portfolio-reinaldo/](https://reinaldobarreto.github.io/portfolio-reinaldo/)
 
-Portfólio moderno com React, TypeScript, Vite e Framer Motion. Identidade **JavaScript-first** com foco em **React Native/Expo** (mobile), **Node.js/NestJS** (backend) e **Next.js/Vite** (frontend web).
+Portfólio moderno com React, TypeScript, Vite e Framer Motion. Identidade **Python-first** com foco em **APIs**, **Automação** e **Data Analytics**, mantendo o ecossistema JavaScript/TypeScript como stack complementar.
 
 ## 🚀 Passo a Passo para Criar o Projeto
 
@@ -140,7 +140,7 @@ Modifique `src/components/Scene3D.tsx` para:
 
 1. **Commit e push** as alterações para o repositório
 2. **Vá para** Actions → Deploy to GitHub Pages → Run workflow
-3. **Acesse** o site em https://reinaldobarreto.github.io/portfolio-reinaldo-react/
+3. **Acesse** o site em https://reinaldobarreto.github.io/portfolio-reinaldo/
 
 ## 📞 Contato
 

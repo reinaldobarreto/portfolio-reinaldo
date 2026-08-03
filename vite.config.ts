@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
       : process.env.VITE_BASE ??
         (process.env.GITHUB_REPOSITORY
           ? `/${process.env.GITHUB_REPOSITORY.split("/")[1]}/`
-          : "/portfolio-reinaldo-react/"),
+          : "/portfolio-reinaldo/"),
   server: {
     host: "::",
     port: 8080,
