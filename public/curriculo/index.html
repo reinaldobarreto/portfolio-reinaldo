@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currículo | Reinaldo Barreto</title>
+  <meta
+    name="description"
+    content="Currículo HTML imprimível de Reinaldo Barreto, com foco em Python Backend, automação, análise de dados, SQL e arquitetura escalável."
+  />
+  <link rel="icon" href="../favicon.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --page-w: 210mm;
+      --page-h: 297mm;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe4f0;
+      --blue: #3776ab;
+      --yellow: #ffd343;
+      --green: #6ea81b;
+      --paper: #ffffff;
+      --soft: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e9eef5;
+      color: var(--ink);
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+    }
+
+    .sheet {
+      width: var(--page-w);
+      min-height: var(--page-h);
+      margin: 12mm auto;
+      background: var(--paper);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .section-title {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #1e3a8a;
+      font-size: 11px;
+      font-weight: 700;
+      margin: 0 6px 6px 0;
+    }
+
+    .timeline-item + .timeline-item {
+      border-top: 1px solid var(--line);
+      margin-top: 14px;
+      padding-top: 14px;
+    }
+
+    .resume-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .resume-list li + li {
+      margin-top: 6px;
+    }
+
+    .print-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(233, 238, 245, 0.96);
+      backdrop-filter: blur(10px);
+    }
+
+    .print-btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #0f172a;
+      background: linear-gradient(135deg, var(--yellow), #f7b500);
+      box-shadow: 0 8px 18px rgba(247, 181, 0, 0.25);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      align-self: center;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+
+    @media print {
+      html, body {
+        background: #fff;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .print-toolbar {
+        display: none !important;
+      }
+
+      .sheet {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .sheet {
+        page-break-after: always;
+      }
+
+      .sheet:last-of-type {
+        page-break-after: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-toolbar">
+    <button class="print-btn" type="button" onclick="window.print()">Imprimir / Salvar em PDF</button>
+    <span class="hint">Ajustado para 2 páginas A4 sem desalinhamento</span>
+  </div>
+
+  <main>
+    <section class="sheet">
+      <div class="grid grid-cols-12 gap-0 min-h-[297mm]">
+        <aside class="col-span-4 bg-slate-950 text-slate-100 px-7 py-8">
+          <div class="mb-8">
+            <h1 class="text-3xl font-black tracking-tight">Reinaldo Barreto</h1>
+            <p class="mt-2 text-sm leading-6 text-slate-300">
+              Engenheiro de Backend Python com foco em APIs, automação, análise de dados, SQL e sistemas escaláveis.
+            </p>
+          </div>
+
+          <div class="space-y-2 text-[13px] leading-6">
+            <div><strong>Email:</strong> <a class="underline decoration-slate-600 hover:decoration-slate-200" href="mailto:reinaldodevbarreto@gmail.com">reinaldodevbarreto@gmail.com</a></div>
+            <div><strong>GitHub:</strong> <a class="underline decoration-slate-600 hover:decoration-slate-200" href="https://github.com/reinaldobarreto" target="_blank" rel="noreferrer">github.com/reinaldobarreto</a></div>
+            <div><strong>LinkedIn:</strong> <a class="underline decoration-slate-600 hover:decoration-slate-200" href="https://www.linkedin.com/in/reinaldobarreto/" target="_blank" rel="noreferrer">linkedin.com/in/reinaldobarreto</a></div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-title !text-slate-200">Stack Principal</div>
+            <div>
+              <span class="chip">Python</span>
+              <span class="chip">FastAPI</span>
+              <span class="chip">Django</span>
+              <span class="chip">DRF</span>
+              <span class="chip">SQL</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Pandas</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Linux</span>
+              <span class="chip">GitHub Actions</span>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-title !text-slate-200">Stack Complementar</div>
+            <div>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">NestJS</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">React</span>
+              <span class="chip">React Native</span>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-title !text-slate-200">Highlights</div>
+            <ul class="resume-list text-[13px] leading-6 text-slate-300">
+              <li>REST APIs, automação de processos e integrações entre sistemas</li>
+              <li>ETL, processamento de arquivos, relatórios e análise de dados</li>
+              <li>SQL, modelagem relacional, otimização e arquitetura limpa</li>
+              <li>Experiência complementar com web/mobile e ecossistema JavaScript</li>
+            </ul>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-title !text-slate-200">Idiomas</div>
+            <p class="text-[13px] leading-6 text-slate-300">Português nativo · Inglês técnico</p>
+          </div>
+        </aside>
+
+        <section class="col-span-8 px-8 py-8">
+          <div>
+            <div class="section-title">Resumo Profissional</div>
+            <p class="text-[14px] leading-7 text-slate-700">
+              Desenvolvedor com foco atual em Python Backend, especializado em FastAPI, Django, Django REST Framework,
+              automação de processos, análise de dados, estatística aplicada, SQL, ETL e integração de APIs. Atuo no
+              desenho e implementação de sistemas escaláveis, serviços REST, automações empresariais, processamento de
+              arquivos e soluções com arquitetura limpa. Também possuo experiência sólida com Node.js, NestJS, Next.js,
+              React e React Native como stack complementar.
+            </p>
+          </div>
+
+          <div class="mt-7">
+            <div class="section-title">Experiência</div>
+
+            <div class="timeline-item">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-[18px] font-extrabold">PRODEB - Companhia de Processamento de Dados da Bahia</h2>
+                  <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+                </div>
+                <div class="text-right text-[12px] font-bold text-slate-500">Mar/2024 - Set/2024</div>
+              </div>
+              <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
+                <li>Desenvolvimento e manutenção de sistemas web corporativos com Vue.js e Spring Boot.</li>
+                <li>Construção de APIs RESTful, versionamento com Git e apoio a práticas de DevOps.</li>
+                <li>Atuação em ambiente corporativo com foco em qualidade, manutenção e regras de negócio.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-[18px] font-extrabold">LAMPP IT Solutions</h2>
+                  <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+                </div>
+                <div class="text-right text-[12px] font-bold text-slate-500">Mar/2022 - Mai/2022</div>
+              </div>
+              <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
+                <li>Participação em projetos de segurança pública com Node.js no backend e Angular no frontend.</li>
+                <li>Integração de APIs REST com bancos relacionais e rotinas de negócio em ambiente corporativo.</li>
+                <li>Experiência aplicada em módulo Python/FastAPI para APIs internas, integração de dados e automação de rotinas.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-[18px] font-extrabold">EDZA Planejamento Consultoria e Informática LTDA</h2>
+                  <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+                </div>
+                <div class="text-right text-[12px] font-bold text-slate-500">Nov/2019 - Mar/2022</div>
+              </div>
+              <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
+                <li>Desenvolvimento de sistemas administrativos para prefeituras nas áreas de RH, tributário e contábil.</li>
+                <li>Atuação com Java EE, JSP, JavaScript, jQuery, Angular e Vue.js em sistemas de uso crítico.</li>
+                <li>Atuação em módulo Python/FastAPI voltado a integração, automação e serviços REST para apoiar processos internos.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <div class="section-title">Entregas em Destaque</div>
+            <ul class="resume-list text-[14px] leading-7 text-slate-700">
+              <li>APIs REST com autenticação, validação, documentação OpenAPI e integração entre sistemas.</li>
+              <li>Automação de planilhas, leitura de PDFs, processamento de arquivos e geração de relatórios.</li>
+              <li>Rotinas ETL, data cleaning, KPIs e análise de dados com foco em processos empresariais.</li>
+              <li>Arquitetura modular, service layer, clean architecture e design orientado a manutenção.</li>
+            </ul>
+          </div>
+
+          <div class="mt-7">
+            <div class="section-title">Formação</div>
+            <p class="text-[14px] leading-7 text-slate-700">
+              Formação e trajetória construídas com forte atuação prática em desenvolvimento de software, sistemas
+              corporativos, backend, automação e entrega de soluções para ambientes reais.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="sheet page-break">
+      <div class="px-8 py-8 min-h-[297mm]">
+        <div class="grid grid-cols-12 gap-8">
+          <section class="col-span-7">
+            <div class="section-title">Foco em Python Backend</div>
+            <ul class="resume-list text-[14px] leading-7 text-slate-700">
+              <li>FastAPI, Django e DRF para construção de APIs REST, microserviços e serviços internos.</li>
+              <li>Pydantic, SQLAlchemy, migrations, service layer e padrões de arquitetura limpa.</li>
+              <li>Integrações com filas, tarefas assíncronas, automações empresariais e processamento de dados.</li>
+              <li>Design de APIs, autenticação JWT/OAuth, documentação com Swagger/OpenAPI e boas práticas de backend.</li>
+            </ul>
+
+            <div class="section-title mt-8">Automação & Dados</div>
+            <ul class="resume-list text-[14px] leading-7 text-slate-700">
+              <li>Automação de planilhas Excel, leitura de PDFs, geração de relatórios e processamento de arquivos.</li>
+              <li>Extração, transformação e importação de dados para rotinas administrativas e operacionais.</li>
+              <li>Pandas, NumPy, SQL analytics, KPIs e estatística descritiva para análise orientada a negócio.</li>
+              <li>Integração com APIs externas, jobs agendados, bots internos e scripts de produtividade.</li>
+            </ul>
+
+            <div class="section-title mt-8">Bancos & SQL</div>
+            <ul class="resume-list text-[14px] leading-7 text-slate-700">
+              <li>PostgreSQL, MySQL, SQLite, MongoDB e Redis.</li>
+              <li>Queries, joins, views, modelagem relacional, normalização e transações.</li>
+              <li>Otimização de consultas, índices, performance e organização de estruturas para backend escalável.</li>
+            </ul>
+          </section>
+
+          <section class="col-span-5">
+            <div class="section-title">Stack Técnica</div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h3 class="text-[14px] font-extrabold text-slate-900">Principal</h3>
+              <p class="mt-2 text-[13px] leading-6 text-slate-700">
+                Python, FastAPI, Django, DRF, SQL, PostgreSQL, Pandas, NumPy, Docker, Linux, Git, GitHub Actions.
+              </p>
+
+              <h3 class="mt-5 text-[14px] font-extrabold text-slate-900">Complementar</h3>
+              <p class="mt-2 text-[13px] leading-6 text-slate-700">
+                TypeScript, Node.js, NestJS, Next.js, React, React Native, Vite, Tailwind CSS.
+              </p>
+
+              <h3 class="mt-5 text-[14px] font-extrabold text-slate-900">Arquitetura</h3>
+              <p class="mt-2 text-[13px] leading-6 text-slate-700">
+                Clean Architecture, SOLID, DDD, Repository Pattern, Service Layer, modular backend design.
+              </p>
+            </div>
+
+            <div class="section-title mt-8">Perfil</div>
+            <p class="text-[14px] leading-7 text-slate-700">
+              Perfil voltado a backend profissional com Python, integração entre sistemas, automação de processos,
+              serviços escaláveis e suporte a operações reais de negócio. Capacidade de atuar do desenho técnico até a
+              entrega, com foco em clareza, manutenção e confiabilidade.
+            </p>
+
+            <div class="section-title mt-8">Referências</div>
+            <ul class="resume-list text-[14px] leading-7 text-slate-700">
+              <li>Portfólio: reinaldobarreto.github.io/portfolio-reinaldo/</li>
+              <li>GitHub: github.com/reinaldobarreto</li>
+              <li>LinkedIn: linkedin.com/in/reinaldobarreto</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "p") {
+        event.preventDefault();
+        window.print();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -43,28 +43,9 @@ const Index = () => {
   const [skillsRef, skillsInView] = useInView({ threshold: 0.2, triggerOnce: true });
   const [experienceRef, experienceInView] = useInView({ threshold: 0.2, triggerOnce: true });
 
-  // Função para download do currículo em PDF (robusta com Blob)
-  const downloadCV = async () => {
-    try {
-      const cvUrl = `${import.meta.env.BASE_URL}analista-de-sistemas-desenvolvedor-de-software-full-stack.pdf`;
-      const res = await fetch(cvUrl);
-      if (!res.ok) throw new Error(`Falha ao obter PDF: ${res.status}`);
-      const blob = await res.blob();
-      const objectUrl = URL.createObjectURL(blob);
-
-      const link = document.createElement('a');
-      link.href = objectUrl;
-      link.download = 'analista-de-sistemas-desenvolvedor-de-software-full-stack.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(objectUrl);
-    } catch (error) {
-      console.error('Erro ao baixar o currículo:', error);
-      // Fallback: abrir em nova aba se o navegador impedir o download direto
-      const fallbackUrl = `${import.meta.env.BASE_URL}analista-de-sistemas-desenvolvedor-de-software-full-stack.pdf`;
-      window.open(fallbackUrl, '_blank');
-    }
+  const downloadCV = () => {
+    const cvUrl = `${import.meta.env.BASE_URL}curriculo/`;
+    window.open(cvUrl, '_blank', 'noopener,noreferrer');
   };
 
   const skills = [
@@ -118,6 +99,8 @@ const Index = () => {
     }
   ];
 
+  const baseUrl = import.meta.env.BASE_URL;
+
   const experiences = [
     {
       company: 'PRODEB - Companhia de Processamento de Dados da Bahia',
@@ -148,7 +131,7 @@ const Index = () => {
       description: 'Demo Python-first com endpoints CRUD, documentação Swagger/Redoc e modelagem simples orientada a produção.',
       technologies: ['Python', 'FastAPI', 'Pydantic', 'OpenAPI', 'Swagger', 'Redoc', 'REST'],
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&h=300&fit=crop',
-      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/apis-fastapi/',
+      link: `${baseUrl}demos/apis-fastapi/`,
       featured: true
     },
     {
@@ -156,7 +139,7 @@ const Index = () => {
       description: 'Demo com padrões do Django REST Framework: serializer, viewset e rotas, com documentação OpenAPI.',
       technologies: ['Python', 'Django', 'Django REST Framework', 'OpenAPI', 'Swagger', 'Redoc', 'REST'],
       image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=500&h=300&fit=crop',
-      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/apis-django/',
+      link: `${baseUrl}demos/apis-django/`,
       featured: true
     },
     {
@@ -164,13 +147,13 @@ const Index = () => {
       description: 'Mini demo de análise de dados com estatística descritiva e indicadores a partir de um dataset CSV.',
       technologies: ['Python', 'Pandas', 'NumPy', 'Statistics', 'KPIs', 'Data Cleaning'],
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
-      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/data-analysis-python/',
+      link: `${baseUrl}demos/data-analysis-python/`,
       featured: true
     },
     {
       title: 'PopFaxina — Marketplace de Limpeza',
-      description: 'Produto mobile em sociedade para conectar clientes e prestadores de serviços de limpeza. Projeto privado — código-fonte e detalhes comerciais sob confidencialidade.',
-      technologies: ['React Native', 'Expo', 'TypeScript', 'Supabase', 'MapLibre', 'Mobile-first'],
+      description: 'Plataforma em desenvolvimento para conectar clientes e prestadores de serviços de limpeza. Stack principal: Python/FastAPI no backend + Next.js/Tailwind CSS no frontend. Projeto privado — código-fonte e detalhes comerciais sob confidencialidade.',
+      technologies: ['Python', 'FastAPI', 'Next.js', 'Tailwind CSS', 'REST API', 'SQL'],
       image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=300&fit=crop',
       link: '#',
       isPrivate: true,
@@ -181,7 +164,7 @@ const Index = () => {
       description: 'Portfólio com Vite, React, TypeScript e Tailwind. Reposicionado para Python como stack principal e JavaScript como complementar.',
       technologies: ['Vite', 'React.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GitHub Pages'],
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop',
-      link: 'https://github.com/reinaldobarreto/portfolio-reinaldo-react',
+      link: 'https://github.com/reinaldobarreto/portfolio-reinaldo',
       featured: true
     },
     {
@@ -214,7 +197,7 @@ const Index = () => {
       description: 'CRUD REST completo (GET/POST/PUT/PATCH/DELETE) com JWT, Swagger e Redoc. Demo pública no GitHub Pages.',
       technologies: ['Node.js', 'NestJS', 'JWT', 'Swagger', 'Redoc', 'REST'],
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop',
-      link: 'https://reinaldobarreto.github.io/portfolio-reinaldo-react/demos/apis-nestjs/',
+      link: `${baseUrl}demos/apis-nestjs/`,
       githubLink: 'https://github.com/reinaldobarreto/apis-node-nestjs-demo',
       featured: false
     }
@@ -312,7 +295,7 @@ const Index = () => {
                 className="px-8 py-4 rounded-2xl neuo-pressable text-portfolio-primary font-bold inline-flex items-center justify-center gap-3 group"
               >
                 <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-                Download CV
+                Abrir CV / PDF
               </button>
               <button
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}

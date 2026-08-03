@@ -4,9 +4,13 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Base para GitHub Pages: https://<usuario>.github.io/portfolio-reinaldo-react/
-  // Em desenvolvimento, mantém raiz "/" para evitar caminhos quebrados
-  base: mode === 'development' ? '/' : '/portfolio-reinaldo-react/',
+  base:
+    mode === "development"
+      ? "/"
+      : process.env.VITE_BASE ??
+        (process.env.GITHUB_REPOSITORY
+          ? `/${process.env.GITHUB_REPOSITORY.split("/")[1]}/`
+          : "/portfolio-reinaldo-react/"),
   server: {
     host: "::",
     port: 8080,
