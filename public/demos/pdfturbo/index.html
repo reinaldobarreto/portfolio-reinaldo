@@ -172,6 +172,11 @@
       color: #0b1220;
       background: linear-gradient(135deg, var(--yellow), #f59e0b);
     }
+    button.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+    }
     .result, pre {
       margin: 0;
       padding: 14px;
@@ -195,9 +200,92 @@
       font-size: .8rem;
     }
     .footer a { color: #93c5fd; text-decoration: none; }
+    .glass-loader {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 10, 20, .42);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 999;
+    }
+    .glass-loader.visible {
+      display: flex;
+    }
+    .glass-card {
+      width: min(100%, 420px);
+      padding: 22px 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(20, 28, 44, .86), rgba(17, 24, 39, .76));
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      text-align: center;
+    }
+    .spinner {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.10);
+      border-top-color: var(--yellow);
+      border-right-color: var(--blue);
+      animation: spin 1s linear infinite;
+    }
+    .glass-title {
+      font-size: 1.02rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .glass-subtitle {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+    .glass-file {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.05);
+      font-size: .86rem;
+      color: #dbeafe;
+      word-break: break-word;
+    }
+    .glass-progress {
+      width: 100%;
+      height: 10px;
+      margin-top: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,.08);
+    }
+    .glass-progress > span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(135deg, var(--yellow), var(--blue));
+      transition: width .2s ease;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+  <div class="glass-loader" id="glassLoader" aria-live="polite" aria-busy="true">
+    <div class="glass-card">
+      <div class="spinner"></div>
+      <div class="glass-title" id="loaderTitle">Processando arquivo</div>
+      <div class="glass-subtitle" id="loaderSubtitle">Executando pipeline do PDFTurbo...</div>
+      <div class="glass-file" id="loaderFile">arquivo.pdf</div>
+      <div class="glass-progress"><span id="loaderBar"></span></div>
+    </div>
+  </div>
+
   <div class="wrap">
     <section class="hero">
       <div class="top">
@@ -290,6 +378,11 @@
             <input id="fileSize" type="number" min="1" value="18" aria-label="Tamanho em MB" />
             <button type="button" onclick="runSimulation()">Otimizar</button>
           </div>
+          <div class="row">
+            <input id="realFile" type="file" accept=".pdf" aria-label="Selecionar PDF" onchange="syncSelectedFile(event)" />
+            <button class="secondary" type="button" onclick="simulateUpload()">Simular upload</button>
+            <button class="secondary" type="button" onclick="simulateDownload()">Simular download</button>
+          </div>
           <p class="result" id="summary">Escolha o arquivo e rode uma otimização simulada.</p>
           <pre id="output">{
   "status": "idle",
@@ -335,13 +428,106 @@
       office: "Escritório",
       archive: "Arquivo de longo prazo"
     };
+    const loader = document.getElementById("glassLoader");
+    const loaderTitle = document.getElementById("loaderTitle");
+    const loaderSubtitle = document.getElementById("loaderSubtitle");
+    const loaderFile = document.getElementById("loaderFile");
+    const loaderBar = document.getElementById("loaderBar");
 
     function formatMb(value) {
       return `${value.toFixed(2)} MB`;
     }
 
-    function runSimulation() {
-      const name = document.getElementById("fileName").value || "arquivo.pdf";
+    function getCurrentFileName() {
+      const picked = document.getElementById("realFile").files[0];
+      const typed = document.getElementById("fileName").value.trim();
+      return (picked && picked.name) || typed || "arquivo.pdf";
+    }
+
+    function syncSelectedFile(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById("fileName").value = file.name;
+        const mb = file.size / (1024 * 1024);
+        if (mb > 0) {
+          document.getElementById("fileSize").value = Math.max(1, Math.round(mb));
+        }
+      }
+    }
+
+    function setLoaderProgress(percent) {
+      loaderBar.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+    }
+
+    function openLoader(title, subtitle, fileName) {
+      loaderTitle.textContent = title;
+      loaderSubtitle.textContent = subtitle;
+      loaderFile.textContent = fileName;
+      setLoaderProgress(8);
+      loader.classList.add("visible");
+    }
+
+    function closeLoader() {
+      loader.classList.remove("visible");
+      setLoaderProgress(0);
+    }
+
+    async function simulateLoading(title, subtitle, fileName, checkpoints) {
+      openLoader(title, subtitle, fileName);
+      for (const [percent, delay] of checkpoints) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        setLoaderProgress(percent);
+      }
+      await new Promise((resolve) => setTimeout(resolve, 180));
+      closeLoader();
+    }
+
+    async function simulateUpload() {
+      const fileName = getCurrentFileName();
+      await simulateLoading(
+        "Enviando arquivo para a fila",
+        "Upload com feedback visual em vidro translúcido para UX premium durante a operação.",
+        fileName,
+        [[24, 180], [49, 230], [74, 260], [100, 240]]
+      );
+
+      document.getElementById("summary").textContent =
+        `${fileName} enviado para a fila do PDFTurbo. O frontend exibiu progresso enquanto o worker Python recebia o job.`;
+
+      document.getElementById("output").textContent = JSON.stringify({
+        status: "uploaded",
+        file_name: fileName,
+        queue: "pdf.jobs.optimize",
+        frontend: "React + Tailwind CSS + Vite",
+        backend_helper: "Python upload handler",
+        next_step: "waiting-for-optimization"
+      }, null, 2);
+    }
+
+    async function simulateDownload() {
+      const fileName = getCurrentFileName().replace(/\.pdf$/i, "") + "-optimized.pdf";
+      await simulateLoading(
+        "Preparando download otimizado",
+        "Gerando artefatos e pacote final antes do download do arquivo tratado.",
+        fileName,
+        [[28, 220], [58, 260], [86, 280], [100, 220]]
+      );
+
+      document.getElementById("summary").textContent =
+        `${fileName} ficou pronto para download. A interface simulou geração do arquivo final e entrega do artefato otimizado.`;
+
+      document.getElementById("output").textContent = JSON.stringify({
+        status: "download-ready",
+        file_name: fileName,
+        artifact_url: "/downloads/" + fileName,
+        frontend: "React + Tailwind CSS + Vite",
+        backend_helper: "Python artifact generator",
+        retention: "24h"
+      }, null, 2);
+    }
+
+    async function runSimulation() {
+      const name = getCurrentFileName();
       const preset = document.getElementById("preset").value;
       const original = Number(document.getElementById("fileSize").value || 1);
       const ratio = reductionMap[preset] ?? 0.5;
@@ -349,6 +535,13 @@
       const saved = Math.max(0, original - optimized);
       const pages = Math.max(3, Math.round(original * 7));
       const processingMs = Math.round((original * 120) + (pages * 4));
+
+      await simulateLoading(
+        "Otimizando PDF",
+        "Executando compressão, limpeza estrutural e geração do preview final.",
+        name,
+        [[18, 180], [42, 260], [67, 300], [88, 240], [100, 220]]
+      );
 
       document.getElementById("savedPercent").textContent = `${Math.round(ratio * 100)}%`;
       document.getElementById("jobsProcessed").textContent = String(128 + Math.round(saved * 3));
