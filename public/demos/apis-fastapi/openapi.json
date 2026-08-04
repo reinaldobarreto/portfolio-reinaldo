@@ -1,47 +1,27 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "FastAPI CRUD Demo",
     "description": "Demo Python-first: CRUD REST para Tasks (GET, POST, PATCH, DELETE), JWT (demo), Swagger e Redoc.",
     "version": "1.0.0"
   },
-  "servers": [
-    { "url": "http://localhost:8000", "description": "FastAPI local" }
-  ],
-  "tags": [
-    { "name": "health" },
-    { "name": "auth" },
-    { "name": "tasks" }
-  ],
-  "components": {
-    "securitySchemes": {
-      "bearer": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
-    },
-    "schemas": {
-      "Task": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "integer", "example": 1 },
-          "title": { "type": "string", "example": "Add Pydantic validation" },
-          "done": { "type": "boolean", "example": false }
-        }
-      }
-    }
-  },
   "paths": {
     "/health": {
       "get": {
-        "tags": ["health"],
-        "summary": "GET — health check",
+        "tags": [
+          "health"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successful Response",
             "content": {
               "application/json": {
-                "example": {
-                  "status": "ok",
-                  "service": "apis-fastapi-demo",
-                  "timestamp": "2026-08-03T22:00:00.000Z"
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Health Get"
                 }
               }
             }
@@ -51,30 +31,38 @@
     },
     "/auth/login": {
       "post": {
-        "tags": ["auth"],
-        "summary": "POST — login e JWT",
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "operationId": "login_auth_login_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "email": { "type": "string", "example": "demo@corelabs.dev" },
-                  "password": { "type": "string", "example": "demo123" }
-                }
+                "$ref": "#/components/schemas/LoginIn"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
-            "description": "Token emitido",
+            "description": "Successful Response",
             "content": {
               "application/json": {
-                "example": {
-                  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-                  "token_type": "Bearer",
-                  "expires_in": 3600
+                "schema": {
+                  "$ref": "#/components/schemas/TokenOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -84,19 +72,50 @@
     },
     "/tasks": {
       "get": {
-        "tags": ["tasks"],
-        "summary": "GET — listar tasks",
-        "security": [{ "bearer": [] }],
+        "tags": [
+          "tasks"
+        ],
+        "summary": "List Tasks",
+        "operationId": "list_tasks_tasks_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Lista de tasks",
+            "description": "Successful Response",
             "content": {
               "application/json": {
-                "example": {
-                  "tasks": [
-                    { "id": 1, "title": "Build REST API", "done": true },
-                    { "id": 2, "title": "Add validation (Pydantic)", "done": false }
-                  ]
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  },
+                  "title": "Response List Tasks Tasks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -104,27 +123,57 @@
         }
       },
       "post": {
-        "tags": ["tasks"],
-        "summary": "POST — criar task",
-        "security": [{ "bearer": [] }],
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Create Task",
+        "operationId": "create_task_tasks_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "title": { "type": "string", "example": "New task" }
-                }
+                "$ref": "#/components/schemas/TaskCreateIn"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Criada",
+            "description": "Successful Response",
             "content": {
               "application/json": {
-                "example": { "created": true, "task": { "id": 10, "title": "New task", "done": false } }
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -133,57 +182,335 @@
     },
     "/tasks/{task_id}": {
       "get": {
-        "tags": ["tasks"],
-        "summary": "GET — buscar task por id",
-        "security": [{ "bearer": [] }],
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Get Task",
+        "operationId": "get_task_tasks__task_id__get",
         "parameters": [
-          { "name": "task_id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
         ],
         "responses": {
           "200": {
-            "description": "Encontrada",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Task" } } }
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
           },
-          "404": { "description": "Não encontrada" }
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
         }
       },
       "patch": {
-        "tags": ["tasks"],
-        "summary": "PATCH — atualizar task",
-        "security": [{ "bearer": [] }],
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Patch Task",
+        "operationId": "patch_task_tasks__task_id__patch",
         "parameters": [
-          { "name": "task_id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "done": { "type": "boolean", "example": true }
-                }
+                "$ref": "#/components/schemas/TaskPatchIn"
               }
             }
           }
         },
         "responses": {
-          "200": { "description": "Atualizada" },
-          "404": { "description": "Não encontrada" }
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["tasks"],
-        "summary": "DELETE — remover task",
-        "security": [{ "bearer": [] }],
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Delete Task",
+        "operationId": "delete_task_tasks__task_id__delete",
         "parameters": [
-          { "name": "task_id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
         ],
         "responses": {
-          "204": { "description": "Removida" },
-          "404": { "description": "Não encontrada" }
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoginIn": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "LoginIn"
+      },
+      "Task": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "done": {
+            "type": "boolean",
+            "title": "Done"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "done"
+        ],
+        "title": "Task"
+      },
+      "TaskCreateIn": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "TaskCreateIn"
+      },
+      "TaskPatchIn": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "done": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Done"
+          }
+        },
+        "type": "object",
+        "title": "TaskPatchIn"
+      },
+      "TokenOut": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type",
+            "default": "Bearer"
+          },
+          "expires_in": {
+            "type": "integer",
+            "title": "Expires In",
+            "default": 3600
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token"
+        ],
+        "title": "TokenOut"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
       }
     }
   }
 }
-
