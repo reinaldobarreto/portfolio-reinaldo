@@ -37,12 +37,21 @@
     }
 
     .sheet {
+      position: relative;
       width: var(--page-w);
       min-height: var(--page-h);
       margin: 12mm auto;
       background: var(--paper);
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
       overflow: hidden;
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--yellow), var(--blue), #0f172a);
     }
 
     .page-break {
@@ -56,6 +65,16 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 2px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--yellow), transparent);
     }
 
     .chip {
@@ -119,6 +138,245 @@
       color: var(--muted);
     }
 
+    .sidebar-intro {
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+    }
+
+    .intro-photo-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0 18px;
+    }
+
+    .intro-photo-frame {
+      width: 146px;
+      height: 146px;
+      padding: 5px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255, 211, 67, 0.34), rgba(96, 165, 250, 0.24));
+      box-shadow: 0 18px 34px rgba(2, 8, 23, 0.34);
+    }
+
+    .intro-photo {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.14);
+      background: #020617;
+    }
+
+    .hero-label {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      margin-top: 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 211, 67, 0.2), rgba(255, 255, 255, 0.06));
+      border: 1px solid rgba(255, 211, 67, 0.2);
+      color: #f8fafc;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .impact-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .impact-tile {
+      padding: 10px 8px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(15, 23, 42, 0.18));
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      text-align: center;
+    }
+
+    .impact-tile strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .impact-tile span {
+      display: block;
+      margin-top: 4px;
+      color: #cbd5e1;
+      font-size: 10px;
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-item {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.38);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-panel {
+      padding: 14px 14px 10px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.34);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .summary-card {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .summary-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .summary-lead {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #334155;
+    }
+
+    .summary-highlight {
+      margin: 12px 0 0;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .focus-item {
+      padding: 12px;
+      border-radius: 16px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+    }
+
+    .focus-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #0f172a;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .focus-item span {
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .date-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .experience-card {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .company-type {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .deliveries-card {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffffff, #f9fbff);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .secondary-card {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .reference-list li + li {
+      margin-top: 8px;
+    }
+
     @page {
       size: A4;
       margin: 10mm;
@@ -165,22 +423,52 @@
     <section class="sheet">
       <div class="grid grid-cols-12 gap-0 min-h-[297mm]">
         <aside class="col-span-4 bg-slate-950 text-slate-100 px-7 py-8">
-          <div class="mb-8">
+          <div class="sidebar-intro">
+            <div class="hero-label">Currículo Executivo</div>
+            <div class="intro-photo-wrap">
+              <div class="intro-photo-frame">
+                <img class="intro-photo" src="./foto-perfil.png" alt="Foto profissional de Reinaldo Barreto" />
+              </div>
+            </div>
             <h1 class="text-3xl font-black tracking-tight">Reinaldo Barreto</h1>
             <p class="mt-2 text-sm leading-6 text-slate-300">
               Engenheiro de Backend Python com foco em APIs, automação, análise de dados, SQL e sistemas escaláveis.
             </p>
+            <div class="role-badge">Python Backend • APIs • Automação • Dados</div>
+            <div class="impact-strip">
+              <div class="impact-tile">
+                <strong>Desde 2019</strong>
+                <span>Experiência prática</span>
+              </div>
+              <div class="impact-tile">
+                <strong>Python-first</strong>
+                <span>Backend principal</span>
+              </div>
+              <div class="impact-tile">
+                <strong>APIs + Dados</strong>
+                <span>Entrega real</span>
+              </div>
+            </div>
           </div>
 
-          <div class="space-y-2 text-[13px] leading-6">
-            <div><strong>Email:</strong> <a class="underline decoration-slate-600 hover:decoration-slate-200" href="mailto:reinaldodevbarreto@gmail.com">reinaldodevbarreto@gmail.com</a></div>
-            <div><strong>GitHub:</strong> <a class="underline decoration-slate-600 hover:decoration-slate-200" href="https://github.com/reinaldobarreto" target="_blank" rel="noreferrer">github.com/reinaldobarreto</a></div>
-            <div><strong>LinkedIn:</strong> <a class="underline decoration-slate-600 hover:decoration-slate-200" href="https://www.linkedin.com/in/reinaldobarreto/" target="_blank" rel="noreferrer">linkedin.com/in/reinaldobarreto</a></div>
+          <div class="contact-list text-[13px] leading-6">
+            <div class="contact-item">
+              <span class="contact-label">Email</span>
+              <a class="underline decoration-slate-600 hover:decoration-slate-200" href="mailto:reinaldodevbarreto@gmail.com">reinaldodevbarreto@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">GitHub</span>
+              <a class="underline decoration-slate-600 hover:decoration-slate-200" href="https://github.com/reinaldobarreto" target="_blank" rel="noreferrer">github.com/reinaldobarreto</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <a class="underline decoration-slate-600 hover:decoration-slate-200" href="https://www.linkedin.com/in/reinaldobarreto/" target="_blank" rel="noreferrer">linkedin.com/in/reinaldobarreto</a>
+            </div>
           </div>
 
           <div class="mt-8">
             <div class="section-title !text-slate-200">Stack Principal</div>
-            <div>
+            <div class="sidebar-panel">
               <span class="chip">Python</span>
               <span class="chip">FastAPI</span>
               <span class="chip">Django</span>
@@ -196,7 +484,7 @@
 
           <div class="mt-8">
             <div class="section-title !text-slate-200">Stack Complementar</div>
-            <div>
+            <div class="sidebar-panel">
               <span class="chip">TypeScript</span>
               <span class="chip">Node.js</span>
               <span class="chip">NestJS</span>
@@ -208,97 +496,132 @@
 
           <div class="mt-8">
             <div class="section-title !text-slate-200">Highlights</div>
+            <div class="sidebar-panel">
             <ul class="resume-list text-[13px] leading-6 text-slate-300">
               <li>REST APIs, automação de processos e integrações entre sistemas</li>
               <li>ETL, processamento de arquivos, relatórios e análise de dados</li>
               <li>SQL, modelagem relacional, otimização e arquitetura limpa</li>
               <li>Experiência complementar com web/mobile e ecossistema JavaScript</li>
             </ul>
+            </div>
           </div>
 
           <div class="mt-8">
             <div class="section-title !text-slate-200">Idiomas</div>
-            <p class="text-[13px] leading-6 text-slate-300">Português nativo · Inglês técnico</p>
+            <div class="sidebar-panel">
+              <p class="text-[13px] leading-6 text-slate-300">Português nativo · Inglês técnico</p>
+            </div>
           </div>
         </aside>
 
         <section class="col-span-8 px-8 py-8">
-          <div>
+          <div class="summary-card">
+            <div class="summary-eyebrow">Perfil de Alto Valor</div>
             <div class="section-title">Resumo Profissional</div>
-            <p class="text-[14px] leading-7 text-slate-700">
-              Desenvolvedor com foco atual em Python Backend, especializado em FastAPI, Django, Django REST Framework,
-              automação de processos, análise de dados, estatística aplicada, SQL, ETL e integração de APIs. Atuo no
-              desenho e implementação de sistemas escaláveis, serviços REST, automações empresariais, processamento de
-              arquivos e soluções com arquitetura limpa. Também possuo experiência sólida com Node.js, NestJS, Next.js,
-              React e React Native como stack complementar.
+            <p class="summary-lead">
+              Engenheiro de software com foco em Python Backend para construção de APIs, automação de processos e
+              soluções orientadas a dados. Especializado em FastAPI, Django, Django REST Framework, SQL, ETL e
+              integração entre sistemas, com atuação no desenho e implementação de serviços escaláveis, processamento de
+              arquivos, arquitetura limpa e backend voltado a operação real.
             </p>
+            <p class="summary-highlight">
+              Combino base forte em backend com visão full stack complementar, o que acelera entregas, melhora a
+              comunicação com produto e aumenta a capacidade de resolver problemas de ponta a ponta.
+            </p>
+            <div class="focus-grid">
+              <div class="focus-item">
+                <strong>Arquitetura de APIs</strong>
+                <span>FastAPI, Django, DRF e serviços REST com foco em escalabilidade e manutenção.</span>
+              </div>
+              <div class="focus-item">
+                <strong>Automação com Impacto</strong>
+                <span>Integrações, processamento de arquivos e rotinas que reduzem esforço operacional.</span>
+              </div>
+              <div class="focus-item">
+                <strong>Dados para Decisão</strong>
+                <span>ETL, SQL, KPIs e modelagem relacional conectados a necessidades reais de negócio.</span>
+              </div>
+            </div>
           </div>
 
           <div class="mt-7">
             <div class="section-title">Experiência</div>
 
             <div class="timeline-item">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <h2 class="text-[18px] font-extrabold">PRODEB - Companhia de Processamento de Dados da Bahia</h2>
-                  <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+              <div class="experience-card">
+                <div class="company-type">Setor público • Sistemas corporativos</div>
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 class="text-[18px] font-extrabold">PRODEB - Companhia de Processamento de Dados da Bahia</h2>
+                    <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+                  </div>
+                  <div class="date-pill text-right text-[12px] font-bold text-slate-500">Mar/2024 - Set/2024</div>
                 </div>
-                <div class="text-right text-[12px] font-bold text-slate-500">Mar/2024 - Set/2024</div>
+                <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
+                  <li>Desenvolvimento e manutenção de sistemas web corporativos com Vue.js e Spring Boot.</li>
+                  <li>Construção de APIs RESTful, versionamento com Git e apoio a práticas de DevOps.</li>
+                  <li>Atuação em ambiente corporativo com foco em qualidade, manutenção e regras de negócio.</li>
+                </ul>
               </div>
-              <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
-                <li>Desenvolvimento e manutenção de sistemas web corporativos com Vue.js e Spring Boot.</li>
-                <li>Construção de APIs RESTful, versionamento com Git e apoio a práticas de DevOps.</li>
-                <li>Atuação em ambiente corporativo com foco em qualidade, manutenção e regras de negócio.</li>
-              </ul>
             </div>
 
             <div class="timeline-item">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <h2 class="text-[18px] font-extrabold">LAMPP IT Solutions</h2>
-                  <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+              <div class="experience-card">
+                <div class="company-type">Projetos corporativos • Segurança pública</div>
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 class="text-[18px] font-extrabold">LAMPP IT Solutions</h2>
+                    <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+                  </div>
+                  <div class="date-pill text-right text-[12px] font-bold text-slate-500">Mar/2022 - Mai/2022</div>
                 </div>
-                <div class="text-right text-[12px] font-bold text-slate-500">Mar/2022 - Mai/2022</div>
+                <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
+                  <li>Participação em projetos de segurança pública com Node.js no backend e Angular no frontend.</li>
+                  <li>Integração de APIs REST com bancos relacionais e rotinas de negócio em ambiente corporativo.</li>
+                  <li>Experiência aplicada em módulo Python/FastAPI para APIs internas, integração de dados e automação de rotinas.</li>
+                </ul>
               </div>
-              <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
-                <li>Participação em projetos de segurança pública com Node.js no backend e Angular no frontend.</li>
-                <li>Integração de APIs REST com bancos relacionais e rotinas de negócio em ambiente corporativo.</li>
-                <li>Experiência aplicada em módulo Python/FastAPI para APIs internas, integração de dados e automação de rotinas.</li>
-              </ul>
             </div>
 
             <div class="timeline-item">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <h2 class="text-[18px] font-extrabold">EDZA Planejamento Consultoria e Informática LTDA</h2>
-                  <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+              <div class="experience-card">
+                <div class="company-type">Sistemas administrativos • Setor público</div>
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 class="text-[18px] font-extrabold">EDZA Planejamento Consultoria e Informática LTDA</h2>
+                    <p class="text-[14px] font-semibold text-slate-600">Desenvolvedor Full Stack</p>
+                  </div>
+                  <div class="date-pill text-right text-[12px] font-bold text-slate-500">Nov/2019 - Mar/2022</div>
                 </div>
-                <div class="text-right text-[12px] font-bold text-slate-500">Nov/2019 - Mar/2022</div>
+                <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
+                  <li>Desenvolvimento de sistemas administrativos para prefeituras nas áreas de RH, tributário e contábil.</li>
+                  <li>Atuação com Java EE, JSP, JavaScript, jQuery, Angular e Vue.js em sistemas de uso crítico.</li>
+                  <li>Atuação em módulo Python/FastAPI voltado a integração, automação e serviços REST para apoiar processos internos.</li>
+                </ul>
               </div>
-              <ul class="resume-list mt-3 text-[14px] leading-7 text-slate-700">
-                <li>Desenvolvimento de sistemas administrativos para prefeituras nas áreas de RH, tributário e contábil.</li>
-                <li>Atuação com Java EE, JSP, JavaScript, jQuery, Angular e Vue.js em sistemas de uso crítico.</li>
-                <li>Atuação em módulo Python/FastAPI voltado a integração, automação e serviços REST para apoiar processos internos.</li>
-              </ul>
             </div>
           </div>
 
           <div class="mt-7">
             <div class="section-title">Entregas em Destaque</div>
-            <ul class="resume-list text-[14px] leading-7 text-slate-700">
-              <li>APIs REST com autenticação, validação, documentação OpenAPI e integração entre sistemas.</li>
-              <li>Automação de planilhas, leitura de PDFs, processamento de arquivos e geração de relatórios.</li>
-              <li>Rotinas ETL, data cleaning, KPIs e análise de dados com foco em processos empresariais.</li>
-              <li>Arquitetura modular, service layer, clean architecture e design orientado a manutenção.</li>
-            </ul>
+            <div class="deliveries-card">
+              <ul class="resume-list text-[14px] leading-7 text-slate-700">
+                <li>APIs REST com autenticação, validação, documentação OpenAPI e integração entre sistemas.</li>
+                <li>Automação de planilhas, leitura de PDFs, processamento de arquivos e geração de relatórios.</li>
+                <li>Rotinas ETL, data cleaning, KPIs e análise de dados com foco em processos empresariais.</li>
+                <li>Arquitetura modular, service layer, clean architecture e design orientado a manutenção.</li>
+              </ul>
+            </div>
           </div>
 
           <div class="mt-7">
             <div class="section-title">Formação</div>
-            <p class="text-[14px] leading-7 text-slate-700">
-              Formação e trajetória construídas com forte atuação prática em desenvolvimento de software, sistemas
-              corporativos, backend, automação e entrega de soluções para ambientes reais.
-            </p>
+            <div class="secondary-card">
+              <p class="text-[14px] leading-7 text-slate-700">
+                Formação e trajetória construídas com forte atuação prática em desenvolvimento de software, sistemas
+                corporativos, backend, automação e entrega de soluções para ambientes reais.
+              </p>
+            </div>
           </div>
         </section>
       </div>
@@ -359,7 +682,7 @@
             </p>
 
             <div class="section-title mt-8">Referências</div>
-            <ul class="resume-list text-[14px] leading-7 text-slate-700">
+            <ul class="resume-list reference-list text-[14px] leading-7 text-slate-700">
               <li>Portfólio: reinaldobarreto.github.io/portfolio-reinaldo/</li>
               <li>GitHub: github.com/reinaldobarreto</li>
               <li>LinkedIn: linkedin.com/in/reinaldobarreto</li>
