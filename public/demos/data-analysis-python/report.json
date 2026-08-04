@@ -1,15 +1,27 @@
 {
   "rows": 10,
-  "period": { "start": "2026-07-01", "end": "2026-07-10" },
+  "period": {
+    "start": "2026-07-01",
+    "end": "2026-07-10"
+  },
   "kpis": {
-    "orders_total": 79,
-    "revenue_total": 12608.5,
-    "aov_mean": 156.55,
-    "revenue_mean_per_day": 1260.85
+    "orders_total": 72,
+    "revenue_total": 12608.4,
+    "aov_mean": 175.12,
+    "revenue_mean_per_day": 1260.84
   },
   "by_channel": [
-    { "channel": "web", "orders": 57, "revenue": 11097.6, "aov": 163.07 },
-    { "channel": "partner", "orders": 22, "revenue": 1510.9, "aov": 151.24 }
+    {
+      "channel": "partner",
+      "orders": 15,
+      "revenue": 1510.9,
+      "aov": 100.73
+    },
+    {
+      "channel": "web",
+      "orders": 57,
+      "revenue": 11097.5,
+      "aov": 194.69
+    }
   ]
 }
-

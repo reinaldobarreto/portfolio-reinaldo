@@ -31,7 +31,7 @@ def parse_rows(csv_path: Path) -> list[Row]:
 
 
 def main() -> None:
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parent
     csv_path = root / "data" / "orders.csv"
     rows = parse_rows(csv_path)
 
