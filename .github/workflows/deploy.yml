@@ -22,6 +22,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python demo deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r python_demos/fastapi_crud_openapi/requirements.txt
+          pip install -r python_demos/django_drf_crud_openapi/requirements.txt
+
+      - name: Generate demo artifacts
+        run: |
+          python python_demos/fastapi_crud_openapi/scripts/export_openapi.py
+          python python_demos/django_drf_crud_openapi/scripts/export_openapi.py
+          python python_demos/data_analysis_kpis/generate_report.py
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
