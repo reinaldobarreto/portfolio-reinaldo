@@ -1,6 +1,14 @@
 import json
 import os
 from pathlib import Path
+import sys
+
+
+DEMO_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+
+if str(DEMO_ROOT) not in sys.path:
+    sys.path.insert(0, str(DEMO_ROOT))
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
@@ -14,8 +22,7 @@ from drf_spectacular.generators import SchemaGenerator
 
 def main() -> None:
     schema = SchemaGenerator().get_schema(request=RequestFactory().get("/api/schema/"), public=True)
-    root = Path(__file__).resolve().parents[2]
-    out = root / "public" / "demos" / "apis-django" / "openapi.json"
+    out = PROJECT_ROOT / "public" / "demos" / "apis-django" / "openapi.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(schema, indent=2, ensure_ascii=False), encoding="utf-8")
 
