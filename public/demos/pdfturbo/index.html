@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDFTurbo · Otimizador Brutal</title>
+  <meta
+    name="description"
+    content="Preview do PDFTurbo: frontend React + Tailwind + Vite com apoio backend em Python para processamento, filas e automação de PDFs."
+  />
+  <link rel="icon" href="../../favicon.png" type="image/png" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111827;
+      --panel-2: #182235;
+      --border: rgba(255,255,255,.08);
+      --text: #e8eefc;
+      --muted: #9aa8c7;
+      --blue: #3776ab;
+      --yellow: #ffd343;
+      --green: #7cc16b;
+      --cyan: #22d3ee;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(900px 420px at 0% -10%, rgba(55,118,171,.26), transparent 60%),
+        radial-gradient(900px 420px at 100% 0%, rgba(255,211,67,.14), transparent 60%),
+        var(--bg);
+    }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 24px 16px 56px; }
+    .hero, .card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+    .hero { padding: 22px; }
+    .top {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .badge {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--yellow), #f7b500);
+    }
+    h1 { margin: 0; font-size: 1.5rem; }
+    .lead { margin: 8px 0 0; color: var(--muted); max-width: 760px; line-height: 1.6; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: .86rem;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255,255,255,.04);
+    }
+    .btn.primary {
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--yellow), var(--blue));
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip {
+      font-size: .74rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .grid { display: grid; gap: 14px; margin-top: 16px; }
+    @media (min-width: 980px) { .grid { grid-template-columns: 1.15fr .85fr; } }
+    .card { padding: 18px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .metrics {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 14px;
+    }
+    .metric {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+    }
+    .metric .value { font-size: 1.14rem; font-weight: 900; }
+    .metric .label { margin-top: 3px; font-size: .76rem; color: var(--muted); }
+    .pipeline {
+      display: grid;
+      gap: 10px;
+    }
+    .step {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+    .step strong { display: block; margin-bottom: 4px; }
+    .tag {
+      white-space: nowrap;
+      font-size: .7rem;
+      font-weight: 900;
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--yellow), #f59e0b);
+    }
+    .tag.python { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: #eaf4ff; }
+    .tag.front { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #06243a; }
+    .simulator {
+      display: grid;
+      gap: 10px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .row input, .row select {
+      flex: 1 1 220px;
+      min-width: 0;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      padding: 11px 12px;
+      border-radius: 12px;
+      outline: none;
+    }
+    button {
+      border: 0;
+      cursor: pointer;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-weight: 900;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--yellow), #f59e0b);
+    }
+    .result, pre {
+      margin: 0;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #060b14;
+      color: #dbeafe;
+      font-size: .82rem;
+      overflow: auto;
+    }
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+    .footer a { color: #93c5fd; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="top">
+        <div class="brand">
+          <div class="badge">PDF</div>
+          <div>
+            <h1>PDFTurbo · Otimizador Brutal</h1>
+            <p class="lead">
+              Preview conceitual do produto com <strong>frontend em React + Tailwind CSS + Vite</strong> e
+              <strong>apoio backend em Python</strong> para processamento pesado, automação, filas e geração de artefatos.
+            </p>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/reinaldobarreto/pdfturbo" target="_blank" rel="noopener noreferrer">Ver GitHub</a>
+          <a class="btn" href="../../">Voltar ao portfólio</a>
+        </div>
+      </div>
+
+      <div class="chips">
+        <span class="chip">Python backend helpers</span>
+        <span class="chip">React UI</span>
+        <span class="chip">Tailwind CSS</span>
+        <span class="chip">Vite</span>
+        <span class="chip">PDF automation</span>
+        <span class="chip">GitHub Pages preview</span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Visão do Produto</h2>
+
+        <div class="metrics">
+          <div class="metric">
+            <div class="value" id="savedPercent">68%</div>
+            <div class="label">redução média simulada</div>
+          </div>
+          <div class="metric">
+            <div class="value" id="jobsProcessed">128</div>
+            <div class="label">jobs processados hoje</div>
+          </div>
+          <div class="metric">
+            <div class="value">React + Vite</div>
+            <div class="label">camada visual / dashboard</div>
+          </div>
+          <div class="metric">
+            <div class="value">Python</div>
+            <div class="label">workers, pipelines e automação</div>
+          </div>
+        </div>
+
+        <div class="pipeline">
+          <div class="step">
+            <div>
+              <strong>Interface e fluxo operacional</strong>
+              React + Tailwind + Vite para upload, status de jobs, histórico e relatórios de otimização.
+            </div>
+            <span class="tag front">Frontend</span>
+          </div>
+          <div class="step">
+            <div>
+              <strong>Fila de processamento e regras pesadas</strong>
+              Python para compressão, limpeza, extração, OCR pipeline, merge, split e automações batch.
+            </div>
+            <span class="tag python">Python</span>
+          </div>
+          <div class="step">
+            <div>
+              <strong>Entrega pública do preview</strong>
+              Página estática no GitHub Pages para apresentar arquitetura, fluxo do produto e UX sem depender do backend online.
+            </div>
+            <span class="tag">Pages</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Simulador de Otimização</h2>
+        <div class="simulator">
+          <div class="row">
+            <input id="fileName" type="text" value="contrato-cliente-2026.pdf" aria-label="Nome do arquivo" />
+            <select id="preset" aria-label="Preset">
+              <option value="web">Web leve</option>
+              <option value="office">Escritório</option>
+              <option value="archive">Arquivo de longo prazo</option>
+            </select>
+          </div>
+          <div class="row">
+            <input id="fileSize" type="number" min="1" value="18" aria-label="Tamanho em MB" />
+            <button type="button" onclick="runSimulation()">Otimizar</button>
+          </div>
+          <p class="result" id="summary">Escolha o arquivo e rode uma otimização simulada.</p>
+          <pre id="output">{
+  "status": "idle",
+  "frontend": "React + Tailwind + Vite",
+  "backend_helper": "Python worker",
+  "job": null
+}</pre>
+        </div>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Por que esse stack</h2>
+        <ul class="list">
+          <li>React + Tailwind CSS + Vite aceleram entrega do painel e deixam a UX responsiva.</li>
+          <li>Python entra onde faz mais diferença: automação, parsing, filas e processamento de documentos.</li>
+          <li>GitHub Pages hospeda o preview estático com zero fricção para demonstração comercial.</li>
+          <li>O backend real pode ficar separado depois, com API/worker em FastAPI, Celery, Redis ou jobs assíncronos.</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Casos de uso</h2>
+        <ul class="list">
+          <li>Redução de peso para envio por e-mail e upload em sistemas corporativos.</li>
+          <li>Merge, split e reorganização de lotes de PDFs administrativos.</li>
+          <li>Automação de escritórios com pipelines de conversão, extração e padronização.</li>
+          <li>Pré-processamento para OCR, auditoria documental e geração de relatórios.</li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="footer">
+      CoreLabs Dev Nexus · <a href="../../">Portfólio</a> ·
+      <a href="https://github.com/reinaldobarreto/pdfturbo" target="_blank" rel="noopener noreferrer">PDFTurbo no GitHub</a>
+    </p>
+  </div>
+
+  <script>
+    const reductionMap = { web: 0.68, office: 0.54, archive: 0.33 };
+    const labelMap = {
+      web: "Web leve",
+      office: "Escritório",
+      archive: "Arquivo de longo prazo"
+    };
+
+    function formatMb(value) {
+      return `${value.toFixed(2)} MB`;
+    }
+
+    function runSimulation() {
+      const name = document.getElementById("fileName").value || "arquivo.pdf";
+      const preset = document.getElementById("preset").value;
+      const original = Number(document.getElementById("fileSize").value || 1);
+      const ratio = reductionMap[preset] ?? 0.5;
+      const optimized = Math.max(0.35, original * (1 - ratio));
+      const saved = Math.max(0, original - optimized);
+      const pages = Math.max(3, Math.round(original * 7));
+      const processingMs = Math.round((original * 120) + (pages * 4));
+
+      document.getElementById("savedPercent").textContent = `${Math.round(ratio * 100)}%`;
+      document.getElementById("jobsProcessed").textContent = String(128 + Math.round(saved * 3));
+      document.getElementById("summary").textContent =
+        `${name} otimizado com preset "${labelMap[preset]}": ${formatMb(original)} -> ${formatMb(optimized)}. Economia simulada de ${formatMb(saved)}.`;
+
+      document.getElementById("output").textContent = JSON.stringify({
+        status: "processed",
+        frontend: "React + Tailwind CSS + Vite",
+        backend_helper: "Python worker / queue",
+        job: {
+          file_name: name,
+          preset,
+          original_size_mb: Number(original.toFixed(2)),
+          optimized_size_mb: Number(optimized.toFixed(2)),
+          saved_mb: Number(saved.toFixed(2)),
+          estimated_pages: pages,
+          processing_time_ms: processingMs,
+          artifacts: [
+            "optimized.pdf",
+            "audit-report.json",
+            "preview-thumbnail.webp"
+          ]
+        }
+      }, null, 2);
+    }
+  </script>
+</body>
+</html>

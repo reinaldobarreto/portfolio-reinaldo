@@ -168,11 +168,12 @@ const Index = () => {
       featured: true
     },
     {
-      title: 'PDF Turbo',
-      description: 'Ferramenta JavaScript para manipulação e automação de PDFs, com foco em produtividade e fluxos reutilizáveis.',
-      technologies: ['JavaScript', 'Node.js', 'PDF', 'Automation', 'CLI'],
+      title: 'PDFTurbo — Otimizador Brutal',
+      description: 'Produto focado em automação e otimização de PDFs com frontend em React + Tailwind CSS + Vite e apoio backend em Python para processamento, filas e rotinas pesadas. Preview público hospedado no GitHub Pages.',
+      technologies: ['Python', 'React', 'Tailwind CSS', 'Vite', 'PDF', 'Automation'],
       image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&h=300&fit=crop',
-      link: 'https://github.com/reinaldobarreto/pdfturbo',
+      link: `${baseUrl}demos/pdfturbo/`,
+      githubLink: 'https://github.com/reinaldobarreto/pdfturbo',
       featured: true
     },
     {
