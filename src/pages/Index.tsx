@@ -50,11 +50,48 @@ const Index = () => {
 
   const skills = [
     {
+      category: 'Flutter & Dart (Especialidade)',
+      icon: <Smartphone className="w-8 h-8" />,
+      technologies: ['Flutter', 'Dart', 'Material 3', 'Cupertino', 'Widgets', 'Slivers', 'Animations', 'Flutter Web'],
+      description: 'Apps multiplataforma (Android, iOS e Web) com UI fluida 60/120fps, design system próprio e código único'
+    },
+    {
+      category: 'Arquitetura & State Management',
+      icon: <Layers className="w-8 h-8" />,
+      technologies: ['Riverpod', 'Provider', 'BLoC/Cubit', 'GetX', 'Clean Architecture', 'MVVM', 'go_router', 'Freezed'],
+      description: 'Camadas bem separadas, injeção de dependência, rotas declarativas e estado previsível em apps de produção'
+    },
+    {
+      category: 'Dados & Offline-first',
+      icon: <Database className="w-8 h-8" />,
+      technologies: ['SQLite/sqflite', 'Hive', 'Isar', 'Drift', 'shared_preferences', 'Dio', 'Retrofit/Chopper', 'JSON Serializable'],
+      description: 'Persistência local, cache, sincronização e consumo de APIs REST com resiliência offline'
+    },
+    {
+      category: 'Firebase & Backend Mobile',
+      icon: <CloudLightning className="w-8 h-8" />,
+      technologies: ['Firebase Auth', 'Firestore', 'Cloud Functions', 'FCM Push', 'Crashlytics', 'Analytics', 'Remote Config', 'Supabase'],
+      description: 'Autenticação, dados em tempo real, notificações push e monitoramento de crashes em apps publicados'
+    },
+    {
+      category: 'Nativo & Publicação',
+      icon: <Terminal className="w-8 h-8" />,
+      technologies: ['Kotlin', 'Java', 'Swift', 'Platform Channels', 'Gradle', 'Xcode', 'Play Store', 'App Store'],
+      description: 'Integrações nativas via platform channels, assinatura de builds e publicação nas lojas'
+    },
+    {
+      category: 'Qualidade & CI/CD Mobile',
+      icon: <Shield className="w-8 h-8" />,
+      technologies: ['Widget Tests', 'Unit Tests', 'Integration Tests', 'Mocktail', 'Codemagic', 'GitHub Actions', 'Fastlane', 'Flavors'],
+      description: 'Testes automatizados, builds por flavor (dev/prod) e entrega contínua para Android e iOS'
+    },
+    {
       category: 'Python Backend Engineering',
       icon: <Server className="w-8 h-8" />,
       technologies: ['Python', 'FastAPI', 'Django', 'DRF', 'Pydantic', 'SQLAlchemy', 'Celery', 'Uvicorn/Gunicorn'],
-      description: 'APIs REST escaláveis, validação robusta, arquitetura limpa, background jobs e serviços prontos para produção'
+      description: 'APIs REST escaláveis para alimentar apps mobile, com validação robusta e arquitetura limpa'
     },
+
     {
       category: 'Automation & Integrations',
       icon: <Terminal className="w-8 h-8" />,
@@ -92,12 +129,13 @@ const Index = () => {
       description: 'Autenticação robusta, validação de I/O e proteção de dados sensíveis aplicadas no backend'
     },
     {
-      category: 'Mobile (Complementary)',
-      icon: <Smartphone className="w-8 h-8" />,
-      technologies: ['React Native', 'Expo', 'Offline-first', 'Push Notifications', 'Performance', 'Animations', 'Android', 'iOS'],
-      description: 'Experiência complementar em mobile multiplataforma para produtos que pedem app nativo com UX premium'
+      category: 'UI/UX Mobile',
+      icon: <Zap className="w-8 h-8" />,
+      technologies: ['Material 3', 'Responsive Layout', 'Dark Mode', 'Hero Animations', 'Rive/Lottie', 'Acessibilidade', 'Design System', 'Figma'],
+      description: 'Interfaces mobile polidas, com micro-interações, temas dinâmicos e acessibilidade'
     }
   ];
+
 
   const baseUrl = import.meta.env.BASE_URL;
 
@@ -126,6 +164,25 @@ const Index = () => {
   ];
 
   const projects = [
+    {
+      title: 'FinTrack360 — App Flutter Financeiro',
+      description: 'App Flutter/Dart de controle financeiro pessoal e familiar. Mobile-first (Android/iOS) com build web para teste rápido: dashboards, categorias, metas e persistência local.',
+      technologies: ['Flutter', 'Dart', 'Material 3', 'State Management', 'SQLite', 'Flutter Web', 'Android', 'iOS'],
+      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500&h=300&fit=crop',
+      link: 'https://reinaldobarreto.github.io/fintrack360/',
+      githubLink: 'https://github.com/reinaldobarreto/fintrack360',
+      featured: true
+    },
+    {
+      title: 'Contagem Assistência Teocrática — Flutter',
+      description: 'App Flutter/Dart para registro e contagem de assistência, com foco em uso offline, interface simples e relatórios rápidos direto no celular.',
+      technologies: ['Flutter', 'Dart', 'Offline-first', 'SQLite', 'Material Design', 'Android'],
+      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop',
+      link: 'https://github.com/reinaldobarreto/contagem_assistencia_teocratica',
+      githubLink: 'https://github.com/reinaldobarreto/contagem_assistencia_teocratica',
+      featured: true
+    },
+
     {
       title: 'FastAPI — CRUD REST + OpenAPI',
       description: 'Demo Python-first com endpoints CRUD, documentação Swagger/Redoc e modelagem simples orientada a produção.',
@@ -186,15 +243,8 @@ const Index = () => {
       featured: false
     },
     {
-      title: 'FinTrack360 — Controle Financeiro',
-      description: 'Projeto de controle financeiro pessoal com foco mobile-first. Evolução do produto para stack JavaScript/React Native.',
-      technologies: ['JavaScript', 'Mobile-first', 'Finance', 'Dashboard', 'PWA'],
-      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500&h=300&fit=crop',
-      link: 'https://reinaldobarreto.github.io/fintrack360/',
-      featured: false
-    },
-    {
       title: 'APIs Node/NestJS',
+
       description: 'CRUD REST completo (GET/POST/PUT/PATCH/DELETE) com JWT, Swagger e Redoc. Demo pública no GitHub Pages.',
       technologies: ['Node.js', 'NestJS', 'JWT', 'Swagger', 'Redoc', 'REST'],
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop',
@@ -265,9 +315,10 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl neuo-inset-sm mb-6"
             >
-              <Server className="w-5 h-5 text-portfolio-secondary" />
+              <Smartphone className="w-5 h-5 text-portfolio-secondary" />
               <span className="text-base md:text-lg text-foreground font-mono font-semibold">
-                Python Backend Engineer · Automation · Data
+                Flutter/Dart Mobile Developer · Python Backend
+
               </span>
               <Rocket className="w-5 h-5 text-portfolio-primary" />
             </motion.div>
