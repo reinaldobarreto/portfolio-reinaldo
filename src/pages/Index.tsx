@@ -50,11 +50,48 @@ const Index = () => {
 
   const skills = [
     {
+      category: 'Flutter & Dart (Especialidade)',
+      icon: <Smartphone className="w-8 h-8" />,
+      technologies: ['Flutter', 'Dart', 'Material 3', 'Cupertino', 'Widgets', 'Slivers', 'Animations', 'Flutter Web'],
+      description: 'Apps multiplataforma (Android, iOS e Web) com UI fluida 60/120fps, design system próprio e código único'
+    },
+    {
+      category: 'Arquitetura & State Management',
+      icon: <Layers className="w-8 h-8" />,
+      technologies: ['Riverpod', 'Provider', 'BLoC/Cubit', 'GetX', 'Clean Architecture', 'MVVM', 'go_router', 'Freezed'],
+      description: 'Camadas bem separadas, injeção de dependência, rotas declarativas e estado previsível em apps de produção'
+    },
+    {
+      category: 'Dados & Offline-first',
+      icon: <Database className="w-8 h-8" />,
+      technologies: ['SQLite/sqflite', 'Hive', 'Isar', 'Drift', 'shared_preferences', 'Dio', 'Retrofit/Chopper', 'JSON Serializable'],
+      description: 'Persistência local, cache, sincronização e consumo de APIs REST com resiliência offline'
+    },
+    {
+      category: 'Firebase & Backend Mobile',
+      icon: <CloudLightning className="w-8 h-8" />,
+      technologies: ['Firebase Auth', 'Firestore', 'Cloud Functions', 'FCM Push', 'Crashlytics', 'Analytics', 'Remote Config', 'Supabase'],
+      description: 'Autenticação, dados em tempo real, notificações push e monitoramento de crashes em apps publicados'
+    },
+    {
+      category: 'Nativo & Publicação',
+      icon: <Terminal className="w-8 h-8" />,
+      technologies: ['Kotlin', 'Java', 'Swift', 'Platform Channels', 'Gradle', 'Xcode', 'Play Store', 'App Store'],
+      description: 'Integrações nativas via platform channels, assinatura de builds e publicação nas lojas'
+    },
+    {
+      category: 'Qualidade & CI/CD Mobile',
+      icon: <Shield className="w-8 h-8" />,
+      technologies: ['Widget Tests', 'Unit Tests', 'Integration Tests', 'Mocktail', 'Codemagic', 'GitHub Actions', 'Fastlane', 'Flavors'],
+      description: 'Testes automatizados, builds por flavor (dev/prod) e entrega contínua para Android e iOS'
+    },
+    {
       category: 'Python Backend Engineering',
       icon: <Server className="w-8 h-8" />,
       technologies: ['Python', 'FastAPI', 'Django', 'DRF', 'Pydantic', 'SQLAlchemy', 'Celery', 'Uvicorn/Gunicorn'],
-      description: 'APIs REST escaláveis, validação robusta, arquitetura limpa, background jobs e serviços prontos para produção'
+      description: 'APIs REST escaláveis para alimentar apps mobile, com validação robusta e arquitetura limpa'
     },
+
     {
       category: 'Automation & Integrations',
       icon: <Terminal className="w-8 h-8" />,
