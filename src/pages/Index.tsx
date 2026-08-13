@@ -129,12 +129,13 @@ const Index = () => {
       description: 'Autenticação robusta, validação de I/O e proteção de dados sensíveis aplicadas no backend'
     },
     {
-      category: 'Mobile (Complementary)',
-      icon: <Smartphone className="w-8 h-8" />,
-      technologies: ['React Native', 'Expo', 'Offline-first', 'Push Notifications', 'Performance', 'Animations', 'Android', 'iOS'],
-      description: 'Experiência complementar em mobile multiplataforma para produtos que pedem app nativo com UX premium'
+      category: 'UI/UX Mobile',
+      icon: <Zap className="w-8 h-8" />,
+      technologies: ['Material 3', 'Responsive Layout', 'Dark Mode', 'Hero Animations', 'Rive/Lottie', 'Acessibilidade', 'Design System', 'Figma'],
+      description: 'Interfaces mobile polidas, com micro-interações, temas dinâmicos e acessibilidade'
     }
   ];
+
 
   const baseUrl = import.meta.env.BASE_URL;
 
