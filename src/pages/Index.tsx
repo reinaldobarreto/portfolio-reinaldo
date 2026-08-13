@@ -315,9 +315,10 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl neuo-inset-sm mb-6"
             >
-              <Server className="w-5 h-5 text-portfolio-secondary" />
+              <Smartphone className="w-5 h-5 text-portfolio-secondary" />
               <span className="text-base md:text-lg text-foreground font-mono font-semibold">
-                Python Backend Engineer · Automation · Data
+                Flutter/Dart Mobile Developer · Python Backend
+
               </span>
               <Rocket className="w-5 h-5 text-portfolio-primary" />
             </motion.div>
