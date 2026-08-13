@@ -141,25 +141,32 @@ const Index = () => {
 
   const experiences = [
     {
+      company: 'Freelance Mobile — Flutter/Dart (RBtech)',
+      period: '2024 – Atual · 1+ ano',
+      role: 'Desenvolvedor Mobile Flutter/Dart',
+      description: 'Mais de 1 ano dedicado a projetos freelance em Flutter/Dart: apps multiplataforma (Android, iOS e Web) com Clean Architecture, state management (Riverpod/BLoC), offline-first com SQLite/Hive e integração com APIs REST. Projetos entregues: FinTrack360 e Contagem de Assistência; em andamento: PopFaxina (marketplace de serviços de limpeza, app Flutter + backend Python/FastAPI).',
+      technologies: ['Flutter', 'Dart', 'Riverpod', 'BLoC', 'Firebase', 'SQLite', 'FastAPI', 'Android', 'iOS', 'Flutter Web']
+    },
+    {
       company: 'PRODEB - Companhia de Processamento de Dados da Bahia',
       period: 'Mar/2024 – Set/2024',
       role: 'Desenvolvedor Full Stack',
-      description: 'Desenvolvimento e manutenção de sistemas web utilizando Vue.js e Spring Boot. Construção de APIs RESTful seguras, versionamento com Git e práticas DevOps.',
-      technologies: ['Vue.js', 'Spring Boot', 'Git', 'DevOps', 'APIs RESTful']
+      description: 'Desenvolvimento e manutenção de sistemas web utilizando Vue.js e Spring Boot. Construção de APIs RESTful seguras (OAuth2/JWT), versionamento com Git e práticas DevOps/CI-CD para órgãos estaduais — APIs preparadas para consumo também por clientes mobile.',
+      technologies: ['Vue.js', 'Spring Boot', 'APIs RESTful', 'OAuth2/JWT', 'Git', 'CI/CD', 'PostgreSQL']
     },
     {
       company: 'LAMPP IT Solutions',
       period: 'Mar/2022 – Mai/2022',
-      role: 'Desenvolvedor Full Stack',
-      description: 'Participação em projetos de segurança pública com uso de Node.js no back-end e Angular 2+ no front. Integração de APIs REST com bancos relacionais.',
-      technologies: ['Node.js', 'Angular', 'APIs REST', 'Bancos Relacionais']
+      role: 'Desenvolvedor Full Stack & Mobile',
+      description: 'Projetos de segurança pública com Node.js no back-end e Angular 2+ no front. Atuação no módulo de aplicativo interno mobile (Flutter/Dart) para consulta em campo: telas responsivas, autenticação segura, cache offline e consumo das APIs REST existentes — reduzindo dependência do desktop nas operações externas.',
+      technologies: ['Flutter', 'Dart', 'Node.js', 'Angular', 'APIs REST', 'Offline Cache', 'JWT']
     },
     {
       company: 'EDZA Planejamento Consultoria e Informática LTDA',
       period: 'Nov/2019 – Mar/2022',
-      role: 'Desenvolvedor Full Stack',
-      description: 'Desenvolvimento de sistemas administrativos para prefeituras (RH, Tributário, Contábil). Atuação com Java EE, JSP, JavaScript puro e jQuery.',
-      technologies: ['Java EE', 'JSP', 'JavaScript', 'jQuery', 'Angular', 'Vue.js']
+      role: 'Desenvolvedor Full Stack & Mobile',
+      description: 'Sistemas administrativos para prefeituras (RH, Tributário, Contábil) com Java EE, JSP, Vanilla JS e jQuery, além de módulos modernos em Angular e Vue.js. Prototipação e desenvolvimento do módulo de app interno em Flutter/Dart para servidores públicos (holerite, protocolo e consultas tributárias no celular), integrando-se às APIs REST dos sistemas legados.',
+      technologies: ['Flutter', 'Dart', 'Java EE', 'JSP', 'jQuery', 'Angular', 'Vue.js', 'Oracle', 'PostgreSQL']
     }
   ];
 
@@ -208,12 +215,12 @@ const Index = () => {
       featured: true
     },
     {
-      title: 'PopFaxina — Marketplace de Limpeza',
-      description: 'Plataforma em desenvolvimento para conectar clientes e prestadores de serviços de limpeza. Stack principal: Python/FastAPI no backend + Next.js/Tailwind CSS no frontend. Projeto privado — código-fonte e detalhes comerciais sob confidencialidade.',
-      technologies: ['Python', 'FastAPI', 'Next.js', 'Tailwind CSS', 'REST API', 'SQL'],
+      title: 'PopFaxina — App de Serviços (Em andamento)',
+      description: 'Projeto freelance em andamento: marketplace de serviços de limpeza com app Flutter/Dart (Android e iOS) e backend Python/FastAPI. Agendamentos, perfis de prestadores, notificações push e pagamentos. Repositório público no GitHub em desenvolvimento ativo.',
+      technologies: ['Flutter', 'Dart', 'Firebase', 'Push Notifications', 'Python', 'FastAPI', 'PostgreSQL'],
       image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=300&fit=crop',
-      link: '#',
-      isPrivate: true,
+      link: 'https://github.com/reinaldobarreto/popfaxina',
+      githubLink: 'https://github.com/reinaldobarreto/popfaxina',
       featured: true
     },
     {
@@ -317,8 +324,7 @@ const Index = () => {
             >
               <Smartphone className="w-5 h-5 text-portfolio-secondary" />
               <span className="text-base md:text-lg text-foreground font-mono font-semibold">
-                Flutter/Dart Mobile Developer · Python Backend
-
+                Senior Full Stack · Flutter/Dart Mobile Specialist
               </span>
               <Rocket className="w-5 h-5 text-portfolio-primary" />
             </motion.div>
@@ -329,10 +335,10 @@ const Index = () => {
               animate={heroInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              Foco atual em <span className="text-portfolio-primary font-semibold">Python</span> para construir
-              <span className="text-portfolio-secondary font-semibold"> APIs REST</span>, automação de processos e
-              <span className="text-portfolio-accent font-semibold"> análise de dados</span> com SQL.
-              JavaScript/TypeScript continuam como stack complementar (Node/Nest, Next/React).
+              Especialista em <span className="text-portfolio-primary font-semibold">Flutter &amp; Dart</span> para apps
+              <span className="text-portfolio-secondary font-semibold"> Android, iOS e Web</span> com código único, arquitetura limpa e UI 60/120fps.
+              Complemento full stack sênior com <span className="text-portfolio-accent font-semibold">Python/FastAPI</span>, Node/NestJS,
+              Java/Spring Boot e bancos relacionais — do app à API em produção.
             </motion.p>
 
             {/* Action Buttons */}
@@ -347,7 +353,7 @@ const Index = () => {
                 className="px-8 py-4 rounded-2xl neuo-pressable text-portfolio-primary font-bold inline-flex items-center justify-center gap-3 group"
               >
                 <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-                Abrir CV / PDF
+                Currículo Completo
               </button>
               <button
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
@@ -437,16 +443,16 @@ const Index = () => {
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Stack Python-first para backend, automação e dados, com experiência complementar em JavaScript/TypeScript
-              para web/mobile e integrações de produto
+              Flutter/Dart em primeiro plano, com base full stack sênior em backend, dados e cloud
             </p>
             <div className="flex items-center justify-center mt-4 space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center">
                 <Award className="w-4 h-4 mr-1 text-portfolio-green" />
-                5+ Anos de Experiência
+                6+ Anos de Experiência
               </div>
               <div className="flex items-center">
                 <Target className="w-4 h-4 mr-1 text-portfolio-orange" />
-                20+ Projetos Entregues
+                Flutter/Dart · 1+ ano dedicado
               </div>
             </div>
           </motion.div>
@@ -473,10 +479,10 @@ const Index = () => {
             className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
           >
             {[
-              { icon: Server, label: 'Python Stack', count: 'Primary' },
-              { icon: Terminal, label: 'Automation', count: 'Python' },
-              { icon: Database, label: 'SQL & Data', count: 'Analytics' },
-              { icon: Code, label: 'JavaScript', count: 'Complementary' },
+              { icon: Smartphone, label: 'Flutter & Dart', count: 'Especialidade' },
+              { icon: Layers, label: 'Apps Multiplataforma', count: 'Android · iOS · Web' },
+              { icon: Server, label: 'Backend Full Stack', count: 'Python · Node · Java' },
+              { icon: Database, label: 'Banco & APIs', count: 'SQL · REST' },
               { icon: Coffee, label: 'Cups of Coffee', count: '∞', animate: true }
             ].map((stat, index) => (
               <div key={stat.label} className="text-center p-6 rounded-2xl neuo-flat">
@@ -506,8 +512,8 @@ const Index = () => {
               <Heart className="w-8 h-8 text-portfolio-red ml-3 animate-pulse" />
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Experiência em sistemas corporativos e setor público, com evolução de foco para backend Python, automação
-              e soluções orientadas a dados em ambientes reais
+              Sistemas corporativos e setor público com evolução para mobile: módulos de aplicativo interno em Flutter/Dart
+              na EDZA e na LamppIT, e mais de 1 ano dedicado a projetos freelance Flutter
             </p>
           </motion.div>
           
@@ -533,7 +539,7 @@ const Index = () => {
               <Star className="w-8 h-8 text-portfolio-accent ml-3 animate-pulse" />
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Projetos Python-first (APIs, automação, dados) e stack complementar em JavaScript/TypeScript para web e mobile
+              Apps Flutter/Dart em destaque (Android, iOS e Web) apoiados por backends Python, Node e Java
             </p>
           </motion.div>
           
