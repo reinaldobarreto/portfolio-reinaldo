@@ -243,14 +243,7 @@ const Index = () => {
       featured: false
     },
     {
-      title: 'FinTrack360 — Controle Financeiro',
-      description: 'Projeto de controle financeiro pessoal com foco mobile-first. Evolução do produto para stack JavaScript/React Native.',
-      technologies: ['JavaScript', 'Mobile-first', 'Finance', 'Dashboard', 'PWA'],
-      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500&h=300&fit=crop',
-      link: 'https://reinaldobarreto.github.io/fintrack360/',
-      featured: false
-    },
-    {
+
       title: 'APIs Node/NestJS',
       description: 'CRUD REST completo (GET/POST/PUT/PATCH/DELETE) com JWT, Swagger e Redoc. Demo pública no GitHub Pages.',
       technologies: ['Node.js', 'NestJS', 'JWT', 'Swagger', 'Redoc', 'REST'],
