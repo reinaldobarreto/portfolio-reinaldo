@@ -165,6 +165,25 @@ const Index = () => {
 
   const projects = [
     {
+      title: 'FinTrack360 — App Flutter Financeiro',
+      description: 'App Flutter/Dart de controle financeiro pessoal e familiar. Mobile-first (Android/iOS) com build web para teste rápido: dashboards, categorias, metas e persistência local.',
+      technologies: ['Flutter', 'Dart', 'Material 3', 'State Management', 'SQLite', 'Flutter Web', 'Android', 'iOS'],
+      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500&h=300&fit=crop',
+      link: 'https://reinaldobarreto.github.io/fintrack360/',
+      githubLink: 'https://github.com/reinaldobarreto/fintrack360',
+      featured: true
+    },
+    {
+      title: 'Contagem Assistência Teocrática — Flutter',
+      description: 'App Flutter/Dart para registro e contagem de assistência, com foco em uso offline, interface simples e relatórios rápidos direto no celular.',
+      technologies: ['Flutter', 'Dart', 'Offline-first', 'SQLite', 'Material Design', 'Android'],
+      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop',
+      link: 'https://github.com/reinaldobarreto/contagem_assistencia_teocratica',
+      githubLink: 'https://github.com/reinaldobarreto/contagem_assistencia_teocratica',
+      featured: true
+    },
+
+    {
       title: 'FastAPI — CRUD REST + OpenAPI',
       description: 'Demo Python-first com endpoints CRUD, documentação Swagger/Redoc e modelagem simples orientada a produção.',
       technologies: ['Python', 'FastAPI', 'Pydantic', 'OpenAPI', 'Swagger', 'Redoc', 'REST'],
