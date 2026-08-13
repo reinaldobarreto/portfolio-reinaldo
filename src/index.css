@@ -20,16 +20,16 @@
     --popover: 216 22% 90%;
     --popover-foreground: 220 15% 20%;
 
-    --primary: 25 95% 53%;         /* amber */
+    --primary: 205 99% 39%;        /* Flutter blue #0175C2 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 189 95% 45%;      /* turquoise */
+    --secondary: 196 98% 44%;      /* Flutter sky #13B9FD */
     --secondary-foreground: 0 0% 100%;
 
     --muted: 216 20% 85%;
     --muted-foreground: 220 10% 40%;
 
-    --accent: 200 98% 45%;
+    --accent: 177 100% 33%;        /* Dart teal #00B4AB */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -37,7 +37,7 @@
 
     --border: 216 15% 80%;
     --input: 216 15% 80%;
-    --ring: 25 95% 53%;
+    --ring: 205 99% 39%;
 
     --radius: 1rem;
 
@@ -47,9 +47,9 @@
     --neuo-shadow-light: #ffffff;
 
     /* Portfolio accents */
-    --portfolio-primary: 25 95% 53%;
-    --portfolio-secondary: 189 95% 45%;
-    --portfolio-accent: 200 98% 45%;
+    --portfolio-primary: 205 99% 39%;
+    --portfolio-secondary: 196 98% 44%;
+    --portfolio-accent: 207 90% 54%;
     --portfolio-purple: 262 52% 60%;
     --portfolio-green: 142 76% 45%;
     --portfolio-orange: 31 100% 60%;
@@ -67,16 +67,16 @@
     --popover: 222 11% 19%;
     --popover-foreground: 210 15% 85%;
 
-    --primary: 31 100% 60%;         /* amber */
+    --primary: 196 98% 53%;         /* Flutter sky #13B9FD */
     --primary-foreground: 222 11% 19%;
 
-    --secondary: 189 95% 55%;       /* turquoise */
+    --secondary: 207 90% 61%;       /* Flutter blue #42A5F5 */
     --secondary-foreground: 222 11% 19%;
 
     --muted: 222 11% 22%;
     --muted-foreground: 215 15% 65%;
 
-    --accent: 200 98% 55%;
+    --accent: 177 100% 40%;         /* Dart teal */
     --accent-foreground: 222 11% 19%;
 
     --destructive: 0 84% 60%;
@@ -84,19 +84,19 @@
 
     --border: 222 11% 15%;
     --input: 222 11% 15%;
-    --ring: 31 100% 60%;
+    --ring: 196 98% 53%;
 
     /* Neumorphism shadows – dark */
     --neuo-bg: #2a2d35;
     --neuo-shadow-dark: #1e2027;
     --neuo-shadow-light: #363a45;
 
-    --portfolio-primary: 31 100% 60%;
-    --portfolio-secondary: 189 95% 55%;
-    --portfolio-accent: 200 98% 55%;
+    --portfolio-primary: 196 98% 53%;
+    --portfolio-secondary: 207 90% 61%;
+    --portfolio-accent: 177 100% 45%;
     --portfolio-purple: 262 52% 60%;
     --portfolio-green: 142 76% 45%;
-    --portfolio-orange: 25 95% 65%;
+    --portfolio-orange: 205 99% 45%;
     --portfolio-red: 4 90% 58%;
   }
 }
