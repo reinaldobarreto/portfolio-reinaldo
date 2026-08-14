@@ -133,6 +133,12 @@ const Index = () => {
       icon: <Zap className="w-8 h-8" />,
       technologies: ['Material 3', 'Responsive Layout', 'Dark Mode', 'Hero Animations', 'Rive/Lottie', 'Acessibilidade', 'Design System', 'Figma'],
       description: 'Interfaces mobile polidas, com micro-interações, temas dinâmicos e acessibilidade'
+    },
+    {
+      category: 'Java & Spring (Complementary)',
+      icon: <Server className="w-8 h-8" />,
+      technologies: ['Java', 'Spring Boot', 'Spring Security', 'Java EE', 'JPA/Hibernate', 'REST', 'Maven', 'Oracle'],
+      description: 'Backends corporativos em Java/Spring Boot usados nas três empresas (EDZA, LamppIT e PRODEB), com APIs REST seguras'
     }
   ];
 
