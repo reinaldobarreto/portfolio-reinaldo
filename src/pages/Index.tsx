@@ -133,6 +133,12 @@ const Index = () => {
       icon: <Zap className="w-8 h-8" />,
       technologies: ['Material 3', 'Responsive Layout', 'Dark Mode', 'Hero Animations', 'Rive/Lottie', 'Acessibilidade', 'Design System', 'Figma'],
       description: 'Interfaces mobile polidas, com micro-interações, temas dinâmicos e acessibilidade'
+    },
+    {
+      category: 'Java & Spring (Complementary)',
+      icon: <Server className="w-8 h-8" />,
+      technologies: ['Java', 'Spring Boot', 'Spring Security', 'Java EE', 'JPA/Hibernate', 'REST', 'Maven', 'Oracle'],
+      description: 'Backends corporativos em Java/Spring Boot usados nas três empresas (EDZA, LamppIT e PRODEB), com APIs REST seguras'
     }
   ];
 
@@ -158,15 +164,15 @@ const Index = () => {
       company: 'LAMPP IT Solutions',
       period: 'Mar/2022 – Mai/2022',
       role: 'Desenvolvedor Full Stack & Mobile',
-      description: 'Projetos de segurança pública com Node.js no back-end e Angular 2+ no front. Atuação no módulo de aplicativo interno mobile (Flutter/Dart) para consulta em campo: telas responsivas, autenticação segura, cache offline e consumo das APIs REST existentes — reduzindo dependência do desktop nas operações externas.',
-      technologies: ['Flutter', 'Dart', 'Node.js', 'Angular', 'APIs REST', 'Offline Cache', 'JWT']
+      description: 'Projetos de segurança pública com Node.js e serviços Java/Spring Boot no back-end e Angular 2+ no front. Atuação no módulo de aplicativo interno mobile (Flutter/Dart) para consulta em campo: telas responsivas, autenticação segura, cache offline e consumo das APIs REST existentes — reduzindo dependência do desktop nas operações externas.',
+      technologies: ['Flutter', 'Dart', 'Node.js', 'Java/Spring Boot', 'Angular', 'APIs REST', 'Offline Cache', 'JWT']
     },
     {
       company: 'EDZA Planejamento Consultoria e Informática LTDA',
       period: 'Nov/2019 – Mar/2022',
       role: 'Desenvolvedor Full Stack & Mobile',
-      description: 'Sistemas administrativos para prefeituras (RH, Tributário, Contábil) com Java EE, JSP, Vanilla JS e jQuery, além de módulos modernos em Angular e Vue.js. Prototipação e desenvolvimento do módulo de app interno em Flutter/Dart para servidores públicos (holerite, protocolo e consultas tributárias no celular), integrando-se às APIs REST dos sistemas legados.',
-      technologies: ['Flutter', 'Dart', 'Java EE', 'JSP', 'jQuery', 'Angular', 'Vue.js', 'Oracle', 'PostgreSQL']
+      description: 'Sistemas administrativos para prefeituras (RH, Tributário, Contábil) com Java EE/Spring Boot, JSP, Vanilla JS e jQuery, além de módulos modernos em Angular e Vue.js. Prototipação e desenvolvimento do módulo de app interno em Flutter/Dart para servidores públicos (holerite, protocolo e consultas tributárias no celular), integrando-se às APIs REST dos sistemas legados.',
+      technologies: ['Flutter', 'Dart', 'Java EE', 'Spring Boot', 'JSP', 'jQuery', 'Angular', 'Vue.js', 'Oracle', 'PostgreSQL']
     }
   ];
 
